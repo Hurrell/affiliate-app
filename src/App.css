@@ -1,5 +1,13 @@
+.tag-chart {
+  display: inline-block;
+  width: 90vw;
+  height: 600px;
+  /* margin-left: 50px; */
+}
+
 .App {
   text-align: center;
+  height: 100vh;
 }
 
 .App-logo {
@@ -35,4 +43,10 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.drag-n-drop {
+  background-color: blue;
+  height: 100px;
+  width: 100px;
 }

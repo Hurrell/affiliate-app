@@ -1,24 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import RenderIncomeByTag from "./renderers/renderIncomeByTag";
+import incomeByTag from "./functions/incomeByTag";
+import exampleJsonObj from "./resources/exampleJsonObj";
+import XLSX from "xlsx";
+import xlsxImporter from "./functions/xlsxImporter";
 
 function App() {
+  const [jsObjData, setJsObjData] = useState({});
+
+  const handleFileInput = async (e) => {
+    try {
+      const data = await xlsxImporter(e);
+      console.log(data);
+      setJsObjData(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  let chart = "";
+  if (jsObjData.data) {
+    chart = <RenderIncomeByTag totalsByTag={incomeByTag(jsObjData)} />;
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <input
+        type="file"
+        id="file-selector"
+        accept=".xlsx"
+        onChange={handleFileInput}
+      ></input>
+      <div className="tag-chart">{chart}</div>
     </div>
   );
 }
