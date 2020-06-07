@@ -1,6 +1,7 @@
 {
   "name": "affiliate-app",
   "version": "0.1.0",
+  "homepage": "http://Hurrell.github.io/affiliate-app",
   "private": true,
   "dependencies": {
     "@nivo/bar": "^0.62.0",
