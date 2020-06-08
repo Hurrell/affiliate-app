@@ -61,7 +61,7 @@ function App() {
       );
     } else {
       let newCommissions = [...specifiedCommissions];
-      newCommissions[index].category = value;
+      newCommissions[index].commission = Number((value / 100).toFixed(2));
       setSpecifiedCommissions(newCommissions);
     }
   };
