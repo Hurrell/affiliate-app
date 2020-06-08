@@ -1,4 +1,23 @@
-.tag-chart {
+.commission-input {
+  width: 50px;
+  height: 12px;
+}
+
+.category-table {
+  margin: 10px;
+  /* width: 90vw; */
+  font-size: 12px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.category {
+  text-align: left;
+  display: grid;
+  grid-template-columns: 1fr 0.25fr;
+}
+
+.tag-chart,
+.category-chart {
   display: inline-block;
   width: 90vw;
   height: 600px;
