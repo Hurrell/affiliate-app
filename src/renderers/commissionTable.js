@@ -75,6 +75,8 @@ function CommissionTable(props) {
         <div>
           <input
             type="number"
+            min="0"
+            max="100"
             data-category={item.category}
             onChange={handleCommissionChange}
             className="commission-input"
