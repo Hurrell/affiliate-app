@@ -49,7 +49,7 @@ const arrayToJsObj = (data) => {
 
 const xlsxImporter = (e) => {
   let file = e.target.files[0];
-
+  console.log("here is what the file looks like", e.target.files[0]);
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
 

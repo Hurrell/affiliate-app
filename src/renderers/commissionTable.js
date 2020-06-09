@@ -69,6 +69,6 @@ function CommissionTable(props) {
       </div>
     );
   }
-  return <div className="category-table">{listCategories}</div>;
+  return <form className="category-table">{listCategories}</form>;
 }
 export default CommissionTable;
