@@ -19,10 +19,10 @@ function App() {
   const handleFileInput = async (e) => {
     try {
       const data = await xlsxImporter(e);
-      console.log(data);
+      // console.log(data);
       setJsObjData(data);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
   let incomeByTagChart = "";
@@ -55,12 +55,17 @@ function App() {
     setTop10(!top10);
   };
 
+  const handleResetCommissions = (event) => {
+    setSpecifiedCommissions([]);
+  };
+
   const handleCommissionChange = (category, value) => {
-    console.log("chaaaanging", value);
+    // console.log("chaaaanging", value, category);
     let index = specifiedCommissions.findIndex(
       (item) => item.category === category
     );
     if (index === -1) {
+      // console.log("category not found");
       setSpecifiedCommissions(
         specifiedCommissions.concat({
           category: category,
@@ -73,10 +78,24 @@ function App() {
       setSpecifiedCommissions(newCommissions);
     }
   };
+  // const handleCommissionChange = (event) => {
+  //   console.log("doing stuff");
+  //   let inputs = event.target.elements;
+  //   let newCommissions = [...specifiedCommissions];
+  //   for (let commission of newCommissions) {
+  //     console.log(commission.value, inputs[commission.category].value);
+
+  //     if (inputs[commission.category].value !== commission.value) {
+  //       commission.value = inputs[commission.category].value;
+  //       console.log(commission.value, inputs[commission.category].value);
+  //     }
+  //   }
+  //   setSpecifiedCommissions(newCommissions);
+  // };
   // if (!specifiedCommissions.length) {
   //   handleCommissionChange();
   // }
-  console.log("The Specified Commissions are: ", specifiedCommissions);
+  // console.log("The Specified Commissions are: ", specifiedCommissions);
   return (
     <div className="App">
       <input
@@ -94,6 +113,7 @@ function App() {
         specifiedCommissions={specifiedCommissions}
         onCommissionChange={handleCommissionChange}
         top10={top10}
+        onResetCommissions={handleResetCommissions}
       />
       <div className="device-chart">{incomeByDeviceChart}</div>
 

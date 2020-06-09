@@ -3,6 +3,8 @@ import getCommission from "../functions/getCommission";
 import incomeByCategory from "../functions/incomeByCategory";
 
 function CommissionTable(props) {
+  // console.log("updateCommissions1", props.specifiedCommissions);
+
   const [commissions, setCommissions] = useState([]);
 
   const updateCommissions = (jsObjData) => {
@@ -16,14 +18,14 @@ function CommissionTable(props) {
     // if (data[1][0] !== "Category") {
     //   throw Error("document not formatted as expected (update Commissions)");
     // }
-    //console.log("updateCommissions", jsObjData);
+    // console.log("updateCommissions2", jsObjData, props.specifiedCommissions);
     for (let obj of categoriesArray) {
       commissionTable.push({
         category: obj.category,
         commission: getCommission(obj.category, props.specifiedCommissions),
       });
     }
-
+    // console.log(commissionTable);
     commissionTable.sort((a, b) => a.category.localeCompare(b.category));
     // for row in data,
     // if category not already logged
@@ -32,7 +34,10 @@ function CommissionTable(props) {
       setCommissions(commissionTable);
     } else {
       for (let i in commissionTable) {
-        if (commissionTable[i].category !== commissions[i].category) {
+        if (
+          commissionTable[i].category !== commissions[i].category ||
+          commissionTable[i].commission !== commissions[i].commission
+        ) {
           setCommissions(commissionTable);
         }
       }
@@ -45,10 +50,20 @@ function CommissionTable(props) {
     updateCommissions(props.data);
   }
 
+  const handleResetCommissions = (event) => {
+    event.preventDefault();
+    props.onResetCommissions(event);
+  };
+
   const handleCommissionChange = (event) => {
     let category = event.target.dataset.category;
     let value = event.target.value;
     props.onCommissionChange(category, value);
+  };
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    // props.onCommissionChange(event);
   };
 
   let listCategories = [];
@@ -63,12 +78,19 @@ function CommissionTable(props) {
             data-category={item.category}
             onChange={handleCommissionChange}
             className="commission-input"
-            defaultValue={100 * Number(item.commission)}
+            value={100 * Number(item.commission)}
+            name={item.category}
           />
         </div>
       </div>
     );
   }
-  return <form className="category-table">{listCategories}</form>;
+  return (
+    <form onSubmit={handleFormSubmit} className="category-table">
+      {listCategories}
+      {/* <button>Apply changes</button> */}
+      <button onClick={handleResetCommissions}>Reset Commissions</button>
+    </form>
+  );
 }
 export default CommissionTable;

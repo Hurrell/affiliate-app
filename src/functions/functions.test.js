@@ -23,6 +23,15 @@ describe("getCommission", () => {
       ])
     ).toBe(0.07);
   });
+  test("Returns Error if specified commission unrecognised", () => {
+    expect(
+      getCommission("Computers, Tablets & Components", [
+        { category: "Computers, Tablets & Component", commission: 0.07 },
+      ])
+    ).toEqual(
+      Error("Specified Commission unknown: Computers, Tablets & Component")
+    );
+  });
 });
 
 describe("incomeByTag", () => {
