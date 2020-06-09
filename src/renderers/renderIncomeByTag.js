@@ -11,7 +11,7 @@ const RenderIncomeByTag = (props) => {
       layout="horizontal"
       groupMode="stacked"
       data={props.totalsByTag}
-      keys={["tabletIncome", "phoneIncome", "desktopIncome"]}
+      keys={["phoneIncome", "desktopIncome", "tabletIncome"]}
       //   keys={["hot dog", "burger", "sandwich", "kebab", "fries", "donut"]}
       indexBy="tag"
       margin={{ top: 50, right: 130, bottom: 50, left: 150 }}
