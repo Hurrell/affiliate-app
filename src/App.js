@@ -9,6 +9,8 @@ import CommissionTable from "./renderers/commissionTable";
 import getCommission from "./functions/getCommission";
 import incomeByCategory from "./functions/incomeByCategory";
 import RenderIncomeByCategory from "./renderers/renderIncomeByCategory";
+import RenderIncomeByDevice from "./renderers/renderIncomeByDevice";
+import incomeByDevice from "./functions/incomeByDevice";
 
 function App() {
   const [jsObjData, setJsObjData] = useState(false);
@@ -25,6 +27,7 @@ function App() {
   };
   let incomeByTagChart = "";
   let incomeByCategoryChart = "";
+  let incomeByDeviceChart = "";
   if (jsObjData.data) {
     incomeByTagChart = (
       <RenderIncomeByTag
@@ -39,6 +42,11 @@ function App() {
           top10
         )}
         top10={top10}
+      />
+    );
+    incomeByDeviceChart = (
+      <RenderIncomeByDevice
+        totalsByDevice={incomeByDevice(jsObjData, specifiedCommissions, top10)}
       />
     );
   }
@@ -87,6 +95,8 @@ function App() {
         onCommissionChange={handleCommissionChange}
         top10={top10}
       />
+      <div className="device-chart">{incomeByDeviceChart}</div>
+
       <div className="category-chart">{incomeByCategoryChart}</div>
       <div className="tag-chart">{incomeByTagChart}</div>
     </div>
