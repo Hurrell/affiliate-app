@@ -11,6 +11,8 @@ import incomeByCategory from "./functions/incomeByCategory";
 import RenderIncomeByCategory from "./renderers/renderIncomeByCategory";
 import RenderIncomeByDevice from "./renderers/renderIncomeByDevice";
 import incomeByDevice from "./functions/incomeByDevice";
+import RenderIncomeByTagAndDate from "./renderers/renderIncomeByTagAndDate";
+import incomeByTagAndDay from "./functions/incomeByTagAndDay";
 
 function App() {
   const [jsObjData, setJsObjData] = useState(false);
@@ -28,6 +30,7 @@ function App() {
   let incomeByTagChart = "";
   let incomeByCategoryChart = "";
   let incomeByDeviceChart = "";
+  let incomeByTagAndDateChart = "";
   if (jsObjData.data) {
     incomeByTagChart = (
       <RenderIncomeByTag
@@ -47,6 +50,15 @@ function App() {
     incomeByDeviceChart = (
       <RenderIncomeByDevice
         totalsByDevice={incomeByDevice(jsObjData, specifiedCommissions, top10)}
+      />
+    );
+    incomeByTagAndDateChart = (
+      <RenderIncomeByTagAndDate
+        totalsByTagAndDate={incomeByTagAndDay(
+          jsObjData,
+          specifiedCommissions,
+          top10
+        )}
       />
     );
   }
@@ -119,6 +131,7 @@ function App() {
 
       <div className="category-chart">{incomeByCategoryChart}</div>
       <div className="tag-chart">{incomeByTagChart}</div>
+      <div className="tag-day-chart">{incomeByTagAndDateChart}</div>
     </div>
   );
 }

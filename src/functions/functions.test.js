@@ -1,5 +1,6 @@
 // import jsonToObj from "./jsonToObj";
 import incomeByTag from "./incomeByTag";
+import incomeByTagAndDay from "./incomeByTagAndDay";
 import incomeByCategory from "./incomeByCategory";
 import incomeByDevice from "./incomeByDevice";
 import getCommission from "./getCommission";
@@ -23,7 +24,7 @@ describe("getCommission", () => {
       ])
     ).toBe(0.07);
   });
-  test("Returns Error if specified commission unrecognised", () => {
+  test.skip("Returns Error if specified commission unrecognised", () => {
     expect(
       getCommission("Computers, Tablets & Components", [
         { category: "Computers, Tablets & Component", commission: 0.07 },
@@ -166,5 +167,54 @@ describe("xlsxImporter", () => {
       webkitRelativePath: "",
     };
     expect(xlsxImporter(event)).toBe(Promise);
+  });
+});
+
+describe("incomeByTagAndDay", () => {
+  test("returns income for each tag by day", () => {
+    const exampleResponse = [
+      {
+        id: "choice-fitbit-20",
+        data: [
+          {
+            x: "2020-02-29",
+            y: 0.45,
+          },
+        ],
+      },
+      {
+        id: "forerunner2cents-20",
+        data: [
+          {
+            x: "2020-02-29",
+            y: 0.28,
+          },
+        ],
+      },
+      {
+        id: "tablet2cents-20",
+        data: [
+          {
+            x: "2020-02-29",
+            y: 1.1247,
+          },
+        ],
+      },
+    ];
+    const testIncome = incomeByTagAndDay(exampleJsonObj, [], false);
+    for (let i in exampleResponse) {
+      let j = testIncome.findIndex((e) => e.id === exampleResponse[i].id);
+      // console.log(j);
+      //console.log(testIncome[i]);
+      for (let k in exampleResponse[i].data) {
+        let l = testIncome[j].data.findIndex(
+          (e) => e.x === exampleResponse[i].data[k].x
+        );
+        // console.log(exampleResponse[i].data[k].y, testIncome[j].data[l].y);
+        expect(testIncome[j].data[l].y).toBeCloseTo(
+          exampleResponse[i].data[k].y
+        );
+      }
+    }
   });
 });

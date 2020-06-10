@@ -72,15 +72,15 @@ const getCommission = (category, specifiedCommissions) => {
     //   "specifiedCommissions at getCommission: ",
     //   specifiedCommissions
     // );
-    for (let commiss of specifiedCommissions) {
-      let i = defaultCommissionList.findIndex(
-        (e) => e.category === commiss.category
-      );
-      if (i === -1) {
-        console.log("Specified Commission unknown: ", commiss.category);
-        return Error("Specified Commission unknown: " + commiss.category);
-      }
-    }
+    // for (let commiss of specifiedCommissions) {
+    //   let i = defaultCommissionList.findIndex(
+    //     (e) => e.category === commiss.category
+    //   );
+    //   if (i === -1) {
+    //     console.log("Specified Commission unknown: ", commiss.category);
+    //     return Error("Specified Commission unknown: " + commiss.category);
+    //   }
+    // }
     const specCommissionIndex = specifiedCommissions.findIndex(
       (e) => category === e.category
     );

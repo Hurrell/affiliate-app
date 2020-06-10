@@ -25,6 +25,13 @@
   /* margin-left: 50px; */
 }
 
+.tag-day-chart {
+  display: inline-block;
+  width: 2200px;
+  height: 600px;
+  /* margin-left: 50px; */
+}
+
 .App {
   text-align: center;
   height: 100vh;
