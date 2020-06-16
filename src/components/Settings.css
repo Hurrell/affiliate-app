@@ -1,0 +1,17 @@
+.settings {
+  display: flex;
+  flex-direction: column;
+  margin-left: 15px;
+  background-color: rgba(255, 38, 183, 0.87);
+  overflow: hidden;
+}
+
+.category-settings {
+  overflow: hidden;
+}
+
+.category-settings-body,
+.tag-settings-body {
+  height: 100%;
+  overflow-y: scroll;
+}

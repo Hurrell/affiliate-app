@@ -71,6 +71,7 @@ function CommissionTable(props) {
   for (let item of commissions) {
     listCategories.push(
       <div className="category">
+        <input type="checkbox" />
         <div className="category-name">{item.category}</div>
         <div>
           <input

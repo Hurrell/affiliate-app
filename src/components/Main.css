@@ -1,0 +1,16 @@
+.main {
+  /* These settings fix a bug in Nivo responsive charts. */
+  position: relative;
+  height: 97%;
+
+  /* Styling */
+  background-color: rgb(255, 255, 255);
+  border-radius: 15px;
+}
+
+.chart-container {
+  /* These settings fix a bug in Nivo responsive charts. */
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}

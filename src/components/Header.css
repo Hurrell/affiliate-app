@@ -1,0 +1,46 @@
+.header {
+  /* Place within app layout. */
+  grid-area: header;
+
+  /* Now layout header. */
+  display: grid;
+  grid-template-columns: 1fr 80px 80px;
+
+  /* Style header. */
+  color: grey;
+  background-color: rgba(255, 38, 183, 0.87);
+}
+
+.header > * {
+  /* Should include Load file and settings buttons. */
+  /* Layout */
+  align-self: center;
+  /* Style */
+  font-size: 15px;
+}
+
+/* Hide file input button */
+.file-input {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.file-input + label,
+.settings-selector {
+  /* Layout */
+  padding: 5px;
+  border-radius: 10px;
+
+  /* Style */
+  color: rgba(255, 255, 255, 0.931);
+}
+
+.file-input + label:hover,
+.settings-selector:hover {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.308);
+}

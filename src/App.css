@@ -1,27 +1,56 @@
+.App {
+  /* Fill space */
+  height: 100vh;
+  width: 100vw;
+  /* Create layout */
+  display: grid;
+  grid-template-rows: 50px 1fr;
+  grid-template-areas:
+    "sidebar header header"
+    "sidebar  main settings";
+
+  /* Style */
+  background-color: rgba(255, 38, 183, 1);
+}
+
+.settings-closed {
+  grid-template-columns: 150px 1fr 15px;
+}
+.settings-open {
+  grid-template-columns: 150px 1fr 250px;
+}
+
+/* .page-layout {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 80px 1fr 80px;
+} */
+
 .commission-input {
   width: 50px;
   height: 12px;
 }
 
 .category-table {
-  margin: 10px;
-  /* width: 90vw; */
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  /* margin: 10px;
   font-size: 12px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr); */
 }
 .category {
-  text-align: left;
-  display: grid;
-  grid-template-columns: 1fr 0.25fr;
+  display: flex;
 }
 
 .tag-chart,
 .category-chart,
 .device-chart {
   display: inline-block;
-  width: 90vw;
-  height: 600px;
+  /* width: 90vw; */
+  height: 50px;
   /* margin-left: 50px; */
 }
 
@@ -30,11 +59,6 @@
   width: 2200px;
   height: 600px;
   /* margin-left: 50px; */
-}
-
-.App {
-  text-align: center;
-  height: 100vh;
 }
 
 .App-logo {

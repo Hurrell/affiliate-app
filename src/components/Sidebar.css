@@ -1,0 +1,45 @@
+.sidebar {
+  /* Layout */
+  /* height: 90%; */
+  grid-area: sidebar;
+  /* Styling */
+  background-color: rgba(255, 38, 183, 0.87);
+}
+
+.title {
+  /* Layout */
+  height: 50px;
+  text-align: left;
+  margin-left: 12px;
+  padding-top: 15px;
+  /* Style */
+  color: white;
+  font-size: 21px;
+}
+.sidebar-chart-list {
+  /* Layout */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.sidebar-chart-item {
+  /* Layout */
+  margin: 5px 15px 5px 10px;
+  border-radius: 10px;
+  padding: 10px 5px 10px 20px;
+
+  /* Styling */
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.931);
+}
+
+.sidebar-chart-item:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.selected-item {
+  /* Styling */
+  background-color: white !important; /* Override hover if selected */
+  color: black;
+}

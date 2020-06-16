@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import "./App.css";
+import Header from "./components/Header";
+import Sidebar from "./components/Sidebar";
+import Main from "./components/Main";
+import Settings from "./components/Settings";
 import RenderIncomeByTag from "./renderers/renderIncomeByTag";
 import incomeByTag from "./functions/incomeByTag";
 import exampleJsonObj from "./resources/exampleJsonObj";
@@ -27,41 +31,6 @@ function App() {
       // console.log(err);
     }
   };
-  let incomeByTagChart = "";
-  let incomeByCategoryChart = "";
-  let incomeByDeviceChart = "";
-  let incomeByTagAndDateChart = "";
-  if (jsObjData.data) {
-    incomeByTagChart = (
-      <RenderIncomeByTag
-        totalsByTag={incomeByTag(jsObjData, specifiedCommissions, top10)}
-      />
-    );
-    incomeByCategoryChart = (
-      <RenderIncomeByCategory
-        totalsByCategory={incomeByCategory(
-          jsObjData,
-          specifiedCommissions,
-          top10
-        )}
-        top10={top10}
-      />
-    );
-    incomeByDeviceChart = (
-      <RenderIncomeByDevice
-        totalsByDevice={incomeByDevice(jsObjData, specifiedCommissions, top10)}
-      />
-    );
-    incomeByTagAndDateChart = (
-      <RenderIncomeByTagAndDate
-        totalsByTagAndDate={incomeByTagAndDay(
-          jsObjData,
-          specifiedCommissions,
-          top10
-        )}
-      />
-    );
-  }
 
   const handleTop10Click = (event) => {
     setTop10(!top10);
@@ -90,48 +59,56 @@ function App() {
       setSpecifiedCommissions(newCommissions);
     }
   };
-  // const handleCommissionChange = (event) => {
-  //   console.log("doing stuff");
-  //   let inputs = event.target.elements;
-  //   let newCommissions = [...specifiedCommissions];
-  //   for (let commission of newCommissions) {
-  //     console.log(commission.value, inputs[commission.category].value);
+  // Handle selection of which chart to render.
+  const [chart, setChart] = useState("devices");
+  const handleChartSelect = (event) => {
+    setChart(event.target.dataset.chartname);
+  };
 
-  //     if (inputs[commission.category].value !== commission.value) {
-  //       commission.value = inputs[commission.category].value;
-  //       console.log(commission.value, inputs[commission.category].value);
-  //     }
-  //   }
-  //   setSpecifiedCommissions(newCommissions);
-  // };
-  // if (!specifiedCommissions.length) {
-  //   handleCommissionChange();
-  // }
-  // console.log("The Specified Commissions are: ", specifiedCommissions);
+  // Show or hide Settings
+  const [settingsOpen, setSettingsOpen] = useState(false);
+  const handleToggleSettings = () => {
+    setSettingsOpen(!settingsOpen);
+  };
+  let appClassString = "App settings-closed";
+  if (settingsOpen) {
+    appClassString = "App settings-open";
+  }
+
   return (
-    <div className="App">
-      <input
-        type="file"
-        id="file-selector"
-        accept=".xlsx"
-        onChange={handleFileInput}
-      ></input>
-      <div>
-        Display top 10 only{" "}
-        <input type="checkbox" checked={top10} onClick={handleTop10Click} />{" "}
-      </div>
-      <CommissionTable
-        data={jsObjData}
-        specifiedCommissions={specifiedCommissions}
-        onCommissionChange={handleCommissionChange}
-        top10={top10}
-        onResetCommissions={handleResetCommissions}
+    <div className={appClassString}>
+      <Header
+        handleFileInput={handleFileInput}
+        handleToggleSettings={handleToggleSettings}
       />
+      <Sidebar chart={chart} handleChartSelect={handleChartSelect} />
+      <Main
+        chart={chart}
+        jsObjData={jsObjData}
+        specifiedCommissions={specifiedCommissions}
+        top10={top10}
+      />
+      <Settings
+        jsObjData={jsObjData}
+        specifiedCommissions={specifiedCommissions}
+        top10={top10}
+        handleCommissionChange={handleCommissionChange}
+        handleResetCommissions={handleResetCommissions}
+        handleTop10Click={handleTop10Click}
+      />
+      {/*<Settings />
+      <Body /> */}
+      {/* </div> */}
+
+      {/* Below here, needs refactoring */}
+
+      {/*
+
       <div className="device-chart">{incomeByDeviceChart}</div>
 
       <div className="category-chart">{incomeByCategoryChart}</div>
       <div className="tag-chart">{incomeByTagChart}</div>
-      <div className="tag-day-chart">{incomeByTagAndDateChart}</div>
+      <div className="tag-day-chart">{incomeByTagAndDateChart}</div> */}
     </div>
   );
 }
