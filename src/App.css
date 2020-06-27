@@ -10,7 +10,7 @@
     "sidebar  main settings";
 
   /* Style */
-  background-color: rgba(255, 38, 183, 1);
+  background-color: var(--main-bg-color);
 }
 
 .settings-closed {

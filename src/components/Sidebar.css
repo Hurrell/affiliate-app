@@ -3,7 +3,7 @@
   /* height: 90%; */
   grid-area: sidebar;
   /* Styling */
-  background-color: rgba(255, 38, 183, 0.87);
+  background-color: transparent;
 }
 
 .title {
