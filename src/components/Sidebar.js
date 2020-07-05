@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Sidebar.css";
 
 const SidebarItem = ({ item, handleChartSelect }) => {
@@ -39,7 +39,11 @@ const Sidebar = ({ chart, handleChartSelect }) => {
       <div className="sidebar-chart-list">
         {/* Create sidebar items */}
         {itemList.map((item) => (
-          <SidebarItem item={item} handleChartSelect={handleChartSelect} />
+          <SidebarItem
+            key={item.chartname}
+            item={item}
+            handleChartSelect={handleChartSelect}
+          />
         ))}
       </div>
     </div>

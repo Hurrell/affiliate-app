@@ -35,11 +35,23 @@
 }
 
 .sidebar-chart-item:hover {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: var(--main-light-color);
 }
 
 .selected-item {
   /* Styling */
   background-color: white !important; /* Override hover if selected */
   color: black;
+}
+
+.accordian {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-size: 1.5em;
+}
+
+.active,
+.accordian:hover {
+  background-color: var(--main-light-color);
 }

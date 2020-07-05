@@ -1,6 +1,5 @@
 import { ResponsiveLine } from "@nivo/line";
 import React from "react";
-import { useTheme } from "@nivo/core";
 
 const RenderIncomeByTagAndDate = (props) => {
   return (

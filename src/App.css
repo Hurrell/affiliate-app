@@ -26,25 +26,6 @@
   grid-template-columns: 80px 1fr 80px;
 } */
 
-.commission-input {
-  width: 50px;
-  height: 12px;
-}
-
-.category-table {
-  font-size: 14px;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  /* margin: 10px;
-  font-size: 12px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); */
-}
-.category {
-  display: flex;
-}
-
 .tag-chart,
 .category-chart,
 .device-chart {

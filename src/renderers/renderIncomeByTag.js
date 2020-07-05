@@ -1,6 +1,5 @@
 import { ResponsiveBar } from "@nivo/bar";
 import React from "react";
-import { useTheme } from "@nivo/core";
 
 const RenderIncomeByTag = (props) => {
   return (

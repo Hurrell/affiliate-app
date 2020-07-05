@@ -3,20 +3,9 @@ import "./App.css";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import Main from "./components/Main";
-import Settings from "./components/Settings";
-import RenderIncomeByTag from "./renderers/renderIncomeByTag";
-import incomeByTag from "./functions/incomeByTag";
-import exampleJsonObj from "./resources/exampleJsonObj";
-import XLSX from "xlsx";
+import Settings from "./components/settings/Settings";
+
 import xlsxImporter from "./functions/xlsxImporter";
-import CommissionTable from "./renderers/commissionTable";
-import getCommission from "./functions/getCommission";
-import incomeByCategory from "./functions/incomeByCategory";
-import RenderIncomeByCategory from "./renderers/renderIncomeByCategory";
-import RenderIncomeByDevice from "./renderers/renderIncomeByDevice";
-import incomeByDevice from "./functions/incomeByDevice";
-import RenderIncomeByTagAndDate from "./renderers/renderIncomeByTagAndDate";
-import incomeByTagAndDay from "./functions/incomeByTagAndDay";
 
 function App() {
   const [jsObjData, setJsObjData] = useState(false);

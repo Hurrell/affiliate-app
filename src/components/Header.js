@@ -7,14 +7,14 @@ const Header = ({ handleFileInput, handleToggleSettings }) => {
       <div></div>
       <div>
         <input
-          class="file-input"
+          className="file-input"
           type="file"
           name="file"
           id="file-selector"
           accept=".xlsx"
           onChange={handleFileInput}
         ></input>
-        <label for="file-selector">Load file</label>
+        <label htmlFor="file-selector">Load file</label>
       </div>
       <div onClick={handleToggleSettings} className="settings-selector">
         Settings

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import getCommission from "../functions/getCommission";
-import incomeByCategory from "../functions/incomeByCategory";
+import getCommission from "../../functions/getCommission";
+import incomeByCategory from "../../functions/incomeByCategory";
+import "./CommissionTable.css";
 
 function CommissionTable(props) {
   // console.log("updateCommissions1", props.specifiedCommissions);
@@ -71,7 +72,7 @@ function CommissionTable(props) {
   for (let item of commissions) {
     listCategories.push(
       <div className="category">
-        <input type="checkbox" />
+        <input className="checkbox" type="checkbox" />
         <div className="category-name">{item.category}</div>
         <div>
           <input
