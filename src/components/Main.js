@@ -16,6 +16,7 @@ const Main = ({
   specifiedCommissions,
   top10,
   selectedCategories,
+  categories,
 }) => {
   // Guard against lack of data
   if (!jsObjData.data) {
@@ -33,7 +34,8 @@ const Main = ({
           totalsByDevice={incomeByDevice(
             jsObjData,
             specifiedCommissions,
-            top10
+            top10,
+            categories
           )}
         />
       );

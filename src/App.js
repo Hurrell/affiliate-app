@@ -16,13 +16,21 @@ function App() {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [categories, setCategories] = useState([]);
 
-  // const initCategories = (data) => {
-  //   let newCategories = getUniqueCategories(data)
-  // }
+  const initCategories = (data) => {
+    let newCategories = getUniqueValues(data, "category").map((category) => {
+      return {
+        category: category,
+        selected: true,
+        specifiedCommission: null,
+      };
+    });
+    setCategories(newCategories);
+  };
 
   const handleFileInput = async (e) => {
     try {
       const data = await xlsxImporter(e);
+      initCategories(data.data);
       setSelectedCategories(getUniqueValues(data.data, "category"));
       setJsObjData(data);
     } catch (err) {
@@ -102,6 +110,7 @@ function App() {
         specifiedCommissions={specifiedCommissions}
         top10={top10}
         selectedCategories={selectedCategories}
+        categories={categories}
       />
       <Settings
         jsObjData={jsObjData}
@@ -112,6 +121,7 @@ function App() {
         handleTop10Click={handleTop10Click}
         selectedCategories={selectedCategories}
         handleCategorySelect={handleCategorySelect}
+        categories={categories}
       />
     </div>
   );

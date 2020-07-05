@@ -1,6 +1,6 @@
 import getCommission from "./getCommission";
 
-const incomeByDevice = (data, specifiedCommissions, top10) => {
+const incomeByDevice = (data, specifiedCommissions, top10, categories) => {
   let deviceTotals = [];
 
   if (!data.data) {
