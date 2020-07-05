@@ -1,6 +1,11 @@
 import getCommission from "./getCommission";
 
-const incomeByCategory = (data, specifiedCommissions, top10) => {
+const incomeByCategory = (
+  data,
+  specifiedCommissions,
+  top10,
+  selectedCategories
+) => {
   let categoryTotals = [];
 
   if (!data.data) {
@@ -8,6 +13,9 @@ const incomeByCategory = (data, specifiedCommissions, top10) => {
   }
   //iterate through each data point
   for (let item of data.data) {
+    // Ignore if not in selected Categories.
+    if (!selectedCategories.includes(item.category)) continue;
+
     let itemIndex = categoryTotals.findIndex(
       (e) => e.category === item.category
     );

@@ -110,7 +110,11 @@ describe("incomeByCategory", () => {
         tabletIncome: 0,
       },
     ];
-    const testIncome = incomeByCategory(exampleJsonObj, [], false);
+    const testIncome = incomeByCategory(exampleJsonObj, [], false, [
+      "Computers, Tablets & Components",
+      "Cell Phones & Accessories",
+      "Books & Textbooks",
+    ]);
     for (let i in exampleResponse) {
       let j = testIncome.findIndex(
         (e) => e.category === exampleResponse[i].category

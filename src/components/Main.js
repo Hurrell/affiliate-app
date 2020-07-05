@@ -10,7 +10,13 @@ import incomeByDevice from "../functions/incomeByDevice";
 import RenderIncomeByTagAndDate from "../renderers/renderIncomeByTagAndDate";
 import incomeByTagAndDay from "../functions/incomeByTagAndDay";
 
-const Main = ({ chart, jsObjData, specifiedCommissions, top10 }) => {
+const Main = ({
+  chart,
+  jsObjData,
+  specifiedCommissions,
+  top10,
+  selectedCategories,
+}) => {
   // Guard against lack of data
   if (!jsObjData.data) {
     return (
@@ -45,7 +51,8 @@ const Main = ({ chart, jsObjData, specifiedCommissions, top10 }) => {
           totalsByCategory={incomeByCategory(
             jsObjData,
             specifiedCommissions,
-            top10
+            top10,
+            selectedCategories
           )}
           top10={top10}
         />
@@ -57,7 +64,8 @@ const Main = ({ chart, jsObjData, specifiedCommissions, top10 }) => {
           totalsByTagAndDate={incomeByTagAndDay(
             jsObjData,
             specifiedCommissions,
-            top10
+            top10,
+            selectedCategories
           )}
         />
       );

@@ -11,6 +11,8 @@ const Settings = ({
   top10,
   handleResetCommissions,
   handleTop10Click,
+  selectedCategories,
+  handleCategorySelect,
 }) => {
   const [expandedSection, setExpandedSection] = useState(null);
 
@@ -30,11 +32,7 @@ const Settings = ({
     <div className="settings">
       <div className="top10">
         Display top 10 only
-        <input
-          type="checkbox"
-          checked={top10}
-          onClick={handleTop10Click}
-        />{" "}
+        <input type="checkbox" checked={top10} onClick={handleTop10Click} />
       </div>
       <button
         data-section="tags"
@@ -60,6 +58,8 @@ const Settings = ({
             onCommissionChange={handleCommissionChange}
             top10={top10}
             onResetCommissions={handleResetCommissions}
+            selectedCategories={selectedCategories}
+            handleCategorySelect={handleCategorySelect}
           />
         }
       />

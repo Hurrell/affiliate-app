@@ -12,7 +12,8 @@ function CommissionTable(props) {
     let categoriesArray = incomeByCategory(
       jsObjData,
       props.specifiedCommissions,
-      props.top10
+      props.top10,
+      props.selectedCategories
     );
 
     let commissionTable = [];
@@ -71,8 +72,14 @@ function CommissionTable(props) {
   //console.log("commissionTable", categories);
   for (let item of commissions) {
     listCategories.push(
-      <div className="category">
-        <input className="checkbox" type="checkbox" />
+      <div key={item.category} className="category">
+        <input
+          className="checkbox"
+          type="checkbox"
+          checked={props.selectedCategories.includes(item.category)}
+          onClick={props.handleCategorySelect}
+          data-category={item.category}
+        />
         <div className="category-name">{item.category}</div>
         <div>
           <input

@@ -1,28 +1,53 @@
 import React, { useState } from "react";
 import "./App.css";
+
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import Main from "./components/Main";
 import Settings from "./components/settings/Settings";
 
 import xlsxImporter from "./functions/xlsxImporter";
+import getUniqueValues from "./functions/getUniqueValues";
 
 function App() {
   const [jsObjData, setJsObjData] = useState(false);
   const [specifiedCommissions, setSpecifiedCommissions] = useState([]);
   const [top10, setTop10] = useState(true);
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [categories, setCategories] = useState([]);
+
+  // const initCategories = (data) => {
+  //   let newCategories = getUniqueCategories(data)
+  // }
+
   const handleFileInput = async (e) => {
     try {
       const data = await xlsxImporter(e);
-      // console.log(data);
+      setSelectedCategories(getUniqueValues(data.data, "category"));
       setJsObjData(data);
     } catch (err) {
-      // console.log(err);
+      console.log(err);
     }
   };
 
   const handleTop10Click = (event) => {
     setTop10(!top10);
+  };
+
+  const handleCategorySelect = (event) => {
+    console.log("Category Select: ");
+    if (selectedCategories.includes(event.target.dataset.category)) {
+      setSelectedCategories(
+        selectedCategories.filter((category) => {
+          return category !== event.target.dataset.category;
+        })
+      );
+    } else {
+      setSelectedCategories([
+        ...selectedCategories,
+        event.target.dataset.category,
+      ]);
+    }
   };
 
   const handleResetCommissions = (event) => {
@@ -76,6 +101,7 @@ function App() {
         jsObjData={jsObjData}
         specifiedCommissions={specifiedCommissions}
         top10={top10}
+        selectedCategories={selectedCategories}
       />
       <Settings
         jsObjData={jsObjData}
@@ -84,20 +110,9 @@ function App() {
         handleCommissionChange={handleCommissionChange}
         handleResetCommissions={handleResetCommissions}
         handleTop10Click={handleTop10Click}
+        selectedCategories={selectedCategories}
+        handleCategorySelect={handleCategorySelect}
       />
-      {/*<Settings />
-      <Body /> */}
-      {/* </div> */}
-
-      {/* Below here, needs refactoring */}
-
-      {/*
-
-      <div className="device-chart">{incomeByDeviceChart}</div>
-
-      <div className="category-chart">{incomeByCategoryChart}</div>
-      <div className="tag-chart">{incomeByTagChart}</div>
-      <div className="tag-day-chart">{incomeByTagAndDateChart}</div> */}
     </div>
   );
 }
