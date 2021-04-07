@@ -3,6 +3,7 @@
   flex-direction: column;
   margin-left: 15px;
   background-color: transparent;
+  background-color: var(--main-bg-color);
   overflow: hidden;
 }
 

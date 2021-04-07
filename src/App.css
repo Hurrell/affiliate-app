@@ -10,11 +10,11 @@
     "sidebar  main settings";
 
   /* Style */
-  background-color: var(--main-bg-color);
+  /* background-color: var(--main-bg-color); */
 }
 
 .settings-closed {
-  grid-template-columns: 150px 1fr 15px;
+  grid-template-columns: 150px 1fr 0px;
 }
 .settings-open {
   grid-template-columns: 150px 1fr 250px;
