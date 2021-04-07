@@ -1,7 +1,7 @@
 .main {
   /* These settings fix a bug in Nivo responsive charts. */
   position: relative;
-  height: 99%;
+  height: 100%;
 
   /* Styling */
   background-color: white;
@@ -12,5 +12,6 @@
   /* These settings fix a bug in Nivo responsive charts. */
   position: absolute;
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
+  height: 1000px;
 }
