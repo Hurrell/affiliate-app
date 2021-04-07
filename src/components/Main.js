@@ -9,6 +9,7 @@ import RenderIncomeByCategory from "../renderers/renderIncomeByCategory";
 import incomeByDevice from "../functions/incomeByDevice";
 import RenderIncomeByTagAndDate from "../renderers/renderIncomeByTagAndDate";
 import incomeByTagAndDay from "../functions/incomeByTagAndDay";
+import collateDataBy from "../functions/collateDataBy";
 
 const Main = ({
   chart,

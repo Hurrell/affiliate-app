@@ -13,6 +13,7 @@ const Settings = ({
   handleTop10Click,
   selectedCategories,
   handleCategorySelect,
+  categories,
 }) => {
   const [expandedSection, setExpandedSection] = useState(null);
 
@@ -60,6 +61,7 @@ const Settings = ({
             onResetCommissions={handleResetCommissions}
             selectedCategories={selectedCategories}
             handleCategorySelect={handleCategorySelect}
+            categories={categories}
           />
         }
       />

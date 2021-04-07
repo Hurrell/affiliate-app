@@ -56,6 +56,14 @@ function App() {
         event.target.dataset.category,
       ]);
     }
+
+    let changedCategory = event.target.dataset.category;
+    let categoryIndex = categories.findIndex((item) => {
+      return item.category === changedCategory;
+    });
+    if (categoryIndex === -1) return;
+
+    categories[categoryIndex].selected = !categories[categoryIndex].selected;
   };
 
   const handleResetCommissions = (event) => {
