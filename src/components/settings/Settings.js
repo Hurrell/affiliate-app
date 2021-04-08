@@ -66,10 +66,10 @@ const Settings = ({
         }
       />
 
-      <div className="tag-settings">
+      {/* <div className="tag-settings">
         <div className="tag-settings-header">Tag</div>
         <div className="tag-settings-body"></div>
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -2,7 +2,8 @@ import React from "react";
 
 const TagSettings = ({ expanded }) => {
   if (expanded) {
-    return <div>Tagagagagaga</div>;
+    return <div></div>;
+    //Not yet implemented
   }
   return null;
 };
