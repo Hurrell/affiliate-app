@@ -3,16 +3,17 @@ import XLSX from "xlsx";
 
 // const file = "../resources/exampleUSASales.xlsx";
 /* read a workbook */
-const arrayToJsObj = (data) => {
-  if (!data["Fee-Orders"]) {
+
+const orderPageToJson = (pageData) => {
+  if (!pageData) {
     throw Error("Sheet is not compatible: (No Fee-Orders Sheet)");
   }
 
-  if (data["Fee-Orders"][1].length !== 10) {
+  if (pageData[1].length !== 10) {
     throw Error("Sheet is not compatible");
   }
 
-  const feb2020Headers = [
+  const orderPageHeaders = [
     "Category",
     "Name",
     "ASIN",
@@ -25,17 +26,17 @@ const arrayToJsObj = (data) => {
     "Device Type Group",
   ];
 
-  for (let i in feb2020Headers) {
-    if (feb2020Headers[i] !== data["Fee-Orders"][1][i]) {
+  for (let i in orderPageHeaders) {
+    if (orderPageHeaders[i] !== pageData[1][i]) {
       throw Error("Data values not recognised");
     }
   }
 
-  let jsObjData = { name: data["Fee-Orders"][0][0], data: [] };
+  let orderPageJson = [];
 
-  for (let i = 2; i < data["Fee-Orders"].length; i++) {
-    let row = data["Fee-Orders"][i];
-    jsObjData.data.push({
+  for (let i = 2; i < pageData.length; i++) {
+    let row = pageData[i];
+    orderPageJson.push({
       category: row[0],
       name: row[1],
       asin: row[2],
@@ -48,7 +49,79 @@ const arrayToJsObj = (data) => {
       deviceTypeGroup: row[9],
     });
   }
+  console.log("orderPageJson", orderPageJson);
+  return orderPageJson;
+};
 
+const earningsPageToJson = (pageData) => {
+  if (!pageData) {
+    throw Error("Sheet is not compatible: (No Fee-Earnings Sheet)");
+  }
+
+  if (pageData[1].length !== 12) {
+    throw Error("Sheet is not compatible");
+  }
+
+  const earningsPageHeaders = [
+    "Category",
+    "Name",
+    "ASIN",
+    "Seller",
+    "Tracking ID",
+    "Date Shipped",
+    "Price($)",
+    "Items Shipped",
+    "Returns",
+    "Revenue($)",
+    "Ad Fees($)",
+    "Device Type Group",
+  ];
+
+  for (let i in earningsPageHeaders) {
+    if (earningsPageHeaders[i] !== pageData[1][i]) {
+      throw Error("Data values not recognised");
+    }
+  }
+
+  let earningsPageJson = [];
+
+  for (let i = 2; i < pageData.length; i++) {
+    let row = pageData[i];
+    earningsPageJson.push({
+      category: row[0],
+      name: row[1],
+      asin: row[2],
+      seller: row[3],
+      trackingId: row[4],
+      dateShipped: row[5],
+      price: row[6],
+      itemsShipped: row[7],
+      returns: row[8],
+      "revenue($)": row[9],
+      "adFees($)": row[10],
+      deviceTypeGroup: row[11],
+    });
+  }
+  console.log("earningsPageJson", earningsPageJson);
+  return earningsPageJson;
+};
+
+const arrayToJsObj = (data) => {
+  let jsObjData = {};
+
+  if (!data["Fee-Orders"]) {
+    throw Error("Sheet is not compatible: (No Fee-Orders Sheet)");
+  } else {
+    jsObjData["Fee-Orders"] = orderPageToJson(data["Fee-Orders"]);
+  }
+
+  if (!data["Fee-Earnings"]) {
+    throw Error("Sheet is not compatible: (No Fee-Orders Sheet)");
+  } else {
+    jsObjData["Fee-Earnings"] = earningsPageToJson(data["Fee-Earnings"]);
+  }
+
+  console.log("JsObjectData", jsObjData);
   return jsObjData;
 };
 

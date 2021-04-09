@@ -4,8 +4,11 @@
   "homepage": "http://Hurrell.github.io/affiliate-app",
   "private": true,
   "dependencies": {
-    "@nivo/bar": "^0.62.0",
-    "@nivo/line": "^0.62.0",
+    "@nivo/bar": "^0.67.0",
+    "@nivo/core": "^0.67.0",
+    "@nivo/line": "^0.67.0",
+    "@nivo/pie": "^0.67.0",
+    "@nivo/tooltip": "^0.67.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",

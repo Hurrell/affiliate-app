@@ -3,11 +3,11 @@ import getCommission from "./getCommission";
 const incomeByTag = (data, specifiedCommissions, top10) => {
   let tagTotals = [];
 
-  if (!data.data) {
+  if (!data["Fee-Orders"]) {
     throw Error("No Data");
   }
   //iterate through each data point
-  for (let item of data.data) {
+  for (let item of data["Fee-Orders"]) {
     let itemIndex = tagTotals.findIndex((e) => e.tag === item.tag);
     let lineCost = Number(item.qty) * Number(item["price($)"]);
     //add tag if unique

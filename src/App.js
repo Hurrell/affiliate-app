@@ -30,8 +30,8 @@ function App() {
   const handleFileInput = async (e) => {
     try {
       const data = await xlsxImporter(e);
-      initCategories(data.data);
-      setSelectedCategories(getUniqueValues(data.data, "category"));
+      initCategories(data["Fee-Orders"]);
+      setSelectedCategories(getUniqueValues(data["Fee-Orders"], "category"));
       setJsObjData(data);
     } catch (err) {
       console.log(err);
@@ -90,7 +90,7 @@ function App() {
     }
   };
   // Handle selection of which chart to render.
-  const [chart, setChart] = useState("devices");
+  const [chart, setChart] = useState("home");
   const handleChartSelect = (event) => {
     setChart(event.target.dataset.chartname);
   };

@@ -1,0 +1,34 @@
+.grid-charts {
+  /* These settings fix a bug in Nivo responsive charts. */
+  /* position: absolute;
+  width: 100%;
+  height: 1000px; */
+  /* End */
+  position: relative;
+  width: 100%;
+  height: 1000px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.chart {
+  /* position: absolute; */
+  width: 100%;
+  height: 500px;
+}
+
+.figure {
+  width: 100%;
+  text-align: center;
+  align-self: center;
+}
+
+.figure h2 {
+  font-size: 100px;
+}
+
+.figure p {
+  font-size: 25px;
+}

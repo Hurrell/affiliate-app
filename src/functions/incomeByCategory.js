@@ -8,11 +8,11 @@ const incomeByCategory = (
 ) => {
   let categoryTotals = [];
 
-  if (!data.data) {
+  if (!data["Fee-Orders"]) {
     throw Error("No Data");
   }
   //iterate through each data point
-  for (let item of data.data) {
+  for (let item of data["Fee-Orders"]) {
     // Ignore if not in selected Categories.
     if (!selectedCategories.includes(item.category)) continue;
 

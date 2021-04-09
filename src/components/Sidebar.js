@@ -24,9 +24,11 @@ const Sidebar = ({ chart, handleChartSelect }) => {
   //     setChart(event.target.dataset.chartname);
   //   };
   const itemList = [
+    { name: "Home", chartname: "home" },
     { name: "Devices", chartname: "devices" },
     { name: "Tag", chartname: "tag" },
     { name: "Category", chartname: "category" },
+    { name: "Sales", chartname: "sales" },
     { name: "Time", chartname: "time" },
   ];
   // Add which item selected.

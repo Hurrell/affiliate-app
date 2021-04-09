@@ -10,6 +10,11 @@ import incomeByDevice from "../functions/incomeByDevice";
 import RenderIncomeByTagAndDate from "../renderers/renderIncomeByTagAndDate";
 import incomeByTagAndDay from "../functions/incomeByTagAndDay";
 import collateDataBy from "../functions/collateDataBy";
+import salesByDevice from "../functions/salesByDevice";
+import RenderSalesByDevice from "../renderers/renderPiechart";
+import RenderPiechart from "../renderers/renderPiechart";
+import Sales from "./Sales";
+import Home from "./Home";
 
 const Main = ({
   chart,
@@ -20,7 +25,7 @@ const Main = ({
   categories,
 }) => {
   // Guard against lack of data
-  if (!jsObjData.data) {
+  if (!jsObjData["Fee-Orders"]) {
     return (
       <div className="main">
         <div className="chart-container"></div>
@@ -31,65 +36,111 @@ const Main = ({
   switch (chart) {
     case "devices":
       renderChart = (
-        <RenderIncomeByDevice
-          totalsByDevice={incomeByDevice(
-            jsObjData,
-            specifiedCommissions,
-            top10,
-            categories
-          )}
-        />
+        <div className="chart-container">
+          <RenderIncomeByDevice
+            totalsByDevice={incomeByDevice(
+              jsObjData,
+              specifiedCommissions,
+              top10,
+              categories
+            )}
+          />
+        </div>
       );
       break;
     case "tag":
       renderChart = (
-        <RenderIncomeByTag
-          totalsByTag={incomeByTag(jsObjData, specifiedCommissions, top10)}
-        />
+        <div className="chart-container">
+          <RenderIncomeByTag
+            totalsByTag={incomeByTag(jsObjData, specifiedCommissions, top10)}
+          />
+        </div>
       );
       break;
     case "category":
       renderChart = (
-        <RenderIncomeByCategory
-          totalsByCategory={incomeByCategory(
-            jsObjData,
-            specifiedCommissions,
-            top10,
-            selectedCategories
-          )}
-          top10={top10}
-        />
+        <div className="chart-container">
+          <RenderIncomeByCategory
+            totalsByCategory={incomeByCategory(
+              jsObjData,
+              specifiedCommissions,
+              top10,
+              selectedCategories
+            )}
+            top10={top10}
+          />
+        </div>
       );
       break;
     case "time":
       renderChart = (
-        <RenderIncomeByTagAndDate
-          totalsByTagAndDate={incomeByTagAndDay(
-            jsObjData,
-            specifiedCommissions,
-            top10,
-            selectedCategories
-          )}
+        <div className="chart-container">
+          <RenderIncomeByTagAndDate
+            totalsByTagAndDate={incomeByTagAndDay(
+              jsObjData,
+              specifiedCommissions,
+              top10,
+              selectedCategories
+            )}
+          />
+        </div>
+      );
+      break;
+    case "sales":
+      renderChart = (
+        <Sales
+          jsObjData={jsObjData}
+          specifiedCommissions={specifiedCommissions}
+          top10={top10}
+          selectedCategories={selectedCategories}
+        />
+      );
+      break;
+    case "home":
+      renderChart = (
+        <Home
+          jsObjData={jsObjData}
+          specifiedCommissions={specifiedCommissions}
+          top10={top10}
+          selectedCategories={selectedCategories}
         />
       );
       break;
     default:
       renderChart = (
-        <RenderIncomeByDevice
-          totalsByDevice={incomeByDevice(
-            jsObjData,
-            specifiedCommissions,
-            top10
-          )}
+        <Home
+          jsObjData={jsObjData}
+          specifiedCommissions={specifiedCommissions}
+          top10={top10}
+          selectedCategories={selectedCategories}
         />
       );
+  }
+
+  let dateBanner = <div></div>;
+
+  if (jsObjData["Fee-Orders"]) {
+    let lastDate = String(jsObjData["Fee-Orders"][0].date.split(" ")[0]);
+    let firstDate = String(
+      jsObjData["Fee-Orders"][jsObjData["Fee-Orders"].length - 1].date.split(
+        " "
+      )[0]
+    );
+    dateBanner = (
+      <div>
+        <p>
+          Date ranges from: {firstDate} to {lastDate}
+        </p>
+      </div>
+    );
   }
 
   //Return Chart if data is present
 
   return (
     <div className="main">
-      <div className="chart-container">{renderChart}</div>
+      {dateBanner}
+      {renderChart}
     </div>
   );
 };
