@@ -6,10 +6,12 @@
 
 .home-row {
   display: flex;
+  align-items: center;
 }
 
 .home-row > div {
   margin: 10px;
+  text-align: center;
 }
 
 h2 {
