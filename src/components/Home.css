@@ -1,0 +1,26 @@
+/* .home-grid {
+  margin: 15px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+} */
+
+.home-row {
+  display: flex;
+}
+
+.home-row > div {
+  margin: 10px;
+}
+
+h2 {
+  font-size: 35px;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 35px;
+}
+.stat {
+  font-size: 60px;
+  color: var(--main-bg-color);
+}
