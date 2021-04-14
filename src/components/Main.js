@@ -15,6 +15,7 @@ import RenderSalesByDevice from "../renderers/renderPiechart";
 import RenderPiechart from "../renderers/renderPiechart";
 import Sales from "./Sales";
 import Home from "./Home";
+import filter from "../functions/filter";
 
 const Main = ({
   chart,
@@ -32,6 +33,8 @@ const Main = ({
       </div>
     );
   }
+
+  let filteredData = filter(jsObjData, selectedCategories);
   let renderChart;
   switch (chart) {
     case "devices":
@@ -52,7 +55,7 @@ const Main = ({
       renderChart = (
         <div className="chart-container">
           <RenderIncomeByTag
-            totalsByTag={incomeByTag(jsObjData, specifiedCommissions, top10)}
+            totalsByTag={incomeByTag(filteredData, specifiedCommissions, top10)}
           />
         </div>
       );
