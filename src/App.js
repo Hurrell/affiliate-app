@@ -42,6 +42,14 @@ function App() {
     setTop10(!top10);
   };
 
+  const handleSelectAll = (event) => {
+    if (selectedCategories.length) {
+      setSelectedCategories([]);
+    } else {
+      setSelectedCategories(categories.map((item) => item.category));
+    }
+  };
+
   const handleCategorySelect = (event) => {
     console.log("Category Select: ");
     if (selectedCategories.includes(event.target.dataset.category)) {
@@ -130,6 +138,7 @@ function App() {
         selectedCategories={selectedCategories}
         handleCategorySelect={handleCategorySelect}
         categories={categories}
+        onSelectAll={handleSelectAll}
       />
     </div>
   );

@@ -1,6 +1,6 @@
-const getCommission = (category, specifiedCommissions) => {
+const getCommission = (category, specifiedCommissions = []) => {
   //returns commission as decimal e.g. 1% == 0.01
-  const defaultCommissionList = [
+  const defaultUSCommissionList = [
     { category: "Amazon Fashion Private Brands", commission: 0.04 },
     { category: "Amazon Fresh Products", commission: 0.01 },
     { category: "Amazon Gift Cards", commission: 0.0 },
@@ -66,39 +66,27 @@ const getCommission = (category, specifiedCommissions) => {
     { category: "Watches", commission: 0.04 },
     { category: "Wine, Spirits & Beer", commission: 0.0 },
   ];
-  //return specifiedCommission if it exists
-  if (specifiedCommissions.length) {
-    // console.log(
-    //   "specifiedCommissions at getCommission: ",
-    //   specifiedCommissions
-    // );
-    // for (let commiss of specifiedCommissions) {
-    //   let i = defaultCommissionList.findIndex(
-    //     (e) => e.category === commiss.category
-    //   );
-    //   if (i === -1) {
-    //     console.log("Specified Commission unknown: ", commiss.category);
-    //     return Error("Specified Commission unknown: " + commiss.category);
-    //   }
-    // }
-    const specCommissionIndex = specifiedCommissions.findIndex(
-      (e) => category === e.category
-    );
-    if (specCommissionIndex !== -1) {
-      // console.log("helloo");
-      return Number(specifiedCommissions[specCommissionIndex].commission);
-    }
-  }
-  //otherwise take from defaults
-  const commissionIndex = defaultCommissionList.findIndex(
-    (e) => category === e.category
+
+  //Find and return specifiedCommission if it exists
+  const specCommissionIndex = specifiedCommissions.findIndex(
+    (item) => category === item.category
   );
-  //return false if no value avail
+
+  if (specCommissionIndex !== -1) {
+    return Number(specifiedCommissions[specCommissionIndex].commission);
+  }
+
+  //otherwise take from table
+  const commissionIndex = defaultUSCommissionList.findIndex(
+    (item) => category === item.category
+  );
+
+  //return default if no value avail
   if (commissionIndex === -1) {
     return 0.04;
   } else {
-    // return computed value
-    const commission = defaultCommissionList[commissionIndex].commission;
+    // return table value
+    const commission = defaultUSCommissionList[commissionIndex].commission;
     return Number(commission);
   }
 };

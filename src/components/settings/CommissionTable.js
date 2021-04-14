@@ -3,7 +3,18 @@ import getCommission from "../../functions/getCommission";
 import incomeByCategory from "../../functions/incomeByCategory";
 import "./CommissionTable.css";
 
-function CommissionTable(props) {
+function CommissionTable({
+  data,
+  specifiedCommissions,
+  onCommissionChange,
+  top10,
+  onResetCommissions,
+  handleTop10Click,
+  selectedCategories,
+  handleCategorySelect,
+  categories,
+  onSelectAll,
+}) {
   // console.log("updateCommissions1", props.specifiedCommissions);
 
   const [commissions, setCommissions] = useState([]);
@@ -11,23 +22,21 @@ function CommissionTable(props) {
   const updateCommissions = (jsObjData) => {
     let categoriesArray = incomeByCategory(
       jsObjData,
-      props.specifiedCommissions,
-      props.top10,
-      props.selectedCategories
+      specifiedCommissions,
+      top10,
+      categories.map((item) => {
+        return item.category;
+      })
     );
 
     let commissionTable = [];
-    // if (data[1][0] !== "Category") {
-    //   throw Error("document not formatted as expected (update Commissions)");
-    // }
-    // console.log("updateCommissions2", jsObjData, props.specifiedCommissions);
+
     for (let obj of categoriesArray) {
       commissionTable.push({
         category: obj.category,
-        commission: getCommission(obj.category, props.specifiedCommissions),
+        commission: getCommission(obj.category, specifiedCommissions),
       });
     }
-    // console.log(commissionTable);
     commissionTable.sort((a, b) => a.category.localeCompare(b.category));
     // for row in data,
     // if category not already logged
@@ -46,26 +55,32 @@ function CommissionTable(props) {
     }
   };
 
-  if (!props.data) {
+  //initially set commissions
+  if (!data) {
     return null;
   } else {
-    updateCommissions(props.data);
+    updateCommissions(data);
   }
 
   const handleResetCommissions = (event) => {
     event.preventDefault();
-    props.onResetCommissions(event);
+    onResetCommissions(event);
   };
 
   const handleCommissionChange = (event) => {
     let category = event.target.dataset.category;
     let value = event.target.value;
-    props.onCommissionChange(category, value);
+    onCommissionChange(category, value);
   };
 
+  //Prevent form submission.
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    // props.onCommissionChange(event);
+  };
+
+  const handleSelectAll = (event) => {
+    event.preventDefault();
+    onSelectAll(event);
   };
 
   let listCategories = [];
@@ -76,8 +91,8 @@ function CommissionTable(props) {
         <input
           className="checkbox"
           type="checkbox"
-          checked={props.selectedCategories.includes(item.category)}
-          onClick={props.handleCategorySelect}
+          checked={selectedCategories.includes(item.category)}
+          onClick={handleCategorySelect}
           data-category={item.category}
         />
         <div className="category-name">{item.category}</div>
@@ -96,8 +111,11 @@ function CommissionTable(props) {
       </div>
     );
   }
+
+  console.log("props.categories", categories, selectedCategories);
   return (
     <form onSubmit={handleFormSubmit} className="category-table">
+      <button onClick={handleSelectAll}>Select All</button>
       {listCategories}
       {/* <button>Apply changes</button> */}
       <button onClick={handleResetCommissions}>Reset Commissions</button>

@@ -14,6 +14,7 @@ const Settings = ({
   selectedCategories,
   handleCategorySelect,
   categories,
+  onSelectAll,
 }) => {
   const [expandedSection, setExpandedSection] = useState(null);
 
@@ -62,6 +63,7 @@ const Settings = ({
             selectedCategories={selectedCategories}
             handleCategorySelect={handleCategorySelect}
             categories={categories}
+            onSelectAll={onSelectAll}
           />
         }
       />
