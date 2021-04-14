@@ -5,7 +5,7 @@ const AccordianItem = ({ expanded, contents }) => {
   if (expanded) {
     return (
       <div className="category-settings">
-        <div className="category-settings-header">Category</div>
+        {/* <div className="category-settings-header">Category</div> */}
         <div className="category-settings-body">{contents}</div>
       </div>
     );
