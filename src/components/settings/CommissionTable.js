@@ -9,7 +9,7 @@ function CommissionTable({
   onCommissionChange,
   top10,
   onResetCommissions,
-  handleTop10Click,
+  onTop10Click,
   selectedCategories,
   handleCategorySelect,
   categories,
@@ -108,6 +108,11 @@ function CommissionTable({
     }
   };
 
+  const handleTop10Click = (event) => {
+    event.preventDefault();
+    onTop10Click(event);
+  };
+
   let listCategories = [];
   //console.log("commissionTable", categories);
   for (let item of commissions) {
@@ -148,7 +153,10 @@ function CommissionTable({
         Sort alphabetically
       </button>
 
-      <button onClick={handleSelectAll}>Select All</button>
+      <button onClick={handleSelectAll}>Select All/None</button>
+      <button onClick={handleTop10Click}>Select Top 10/All</button>
+      {/* <input type="checkbox" checked={top10} onClick={handleTop10Click} /> */}
+
       {listCategories}
       {/* <button>Apply changes</button> */}
     </form>

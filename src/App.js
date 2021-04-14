@@ -8,6 +8,7 @@ import Settings from "./components/settings/Settings";
 
 import xlsxImporter from "./functions/xlsxImporter";
 import getUniqueValues from "./functions/getUniqueValues";
+import incomeByCategory from "./functions/incomeByCategory";
 
 function App() {
   const [jsObjData, setJsObjData] = useState(false);
@@ -39,7 +40,28 @@ function App() {
   };
 
   const handleTop10Click = (event) => {
-    setTop10(!top10);
+    console.log("top10");
+    let categoriesArray = incomeByCategory(
+      jsObjData,
+      specifiedCommissions,
+      top10,
+      categories.map((item) => {
+        return item.category;
+      })
+    );
+
+    categoriesArray.sort((a, b) => a.income > b.income);
+
+    let top10Categories = [];
+    for (let i = 0; i < 10; i++) {
+      top10Categories.push(categoriesArray[i].category);
+      console.log("top10click:", categoriesArray[i]);
+    }
+    if (top10Categories.toString() !== selectedCategories.toString()) {
+      setSelectedCategories(top10Categories);
+    } else {
+      setSelectedCategories(categories.map((item) => item.category));
+    }
   };
 
   const handleSelectAll = (event) => {

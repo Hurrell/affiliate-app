@@ -32,10 +32,10 @@ const Settings = ({
 
   return (
     <div className="settings">
-      <div className="top10">
+      {/* <div className="top10">
         Display top 10 only
         <input type="checkbox" checked={top10} onClick={handleTop10Click} />
-      </div>
+      </div> */}
       <button
         data-section="tags"
         onClick={handleButtonClick}
@@ -64,6 +64,7 @@ const Settings = ({
             handleCategorySelect={handleCategorySelect}
             categories={categories}
             onSelectAll={onSelectAll}
+            onTop10Click={handleTop10Click}
           />
         }
       />
