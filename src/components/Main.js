@@ -21,7 +21,6 @@ const Main = ({
   chart,
   jsObjData,
   specifiedCommissions,
-  top10,
   selectedCategories,
   categories,
 }) => {
@@ -44,7 +43,6 @@ const Main = ({
             totalsByDevice={incomeByDevice(
               jsObjData,
               specifiedCommissions,
-              top10,
               categories
             )}
           />
@@ -55,7 +53,7 @@ const Main = ({
       renderChart = (
         <div className="chart-container">
           <RenderIncomeByTag
-            totalsByTag={incomeByTag(filteredData, specifiedCommissions, top10)}
+            totalsByTag={incomeByTag(filteredData, specifiedCommissions)}
           />
         </div>
       );
@@ -67,10 +65,8 @@ const Main = ({
             totalsByCategory={incomeByCategory(
               jsObjData,
               specifiedCommissions,
-              top10,
               selectedCategories
             )}
-            top10={top10}
           />
         </div>
       );
@@ -82,7 +78,6 @@ const Main = ({
             totalsByTagAndDate={incomeByTagAndDay(
               jsObjData,
               specifiedCommissions,
-              top10,
               selectedCategories
             )}
           />
@@ -94,7 +89,6 @@ const Main = ({
         <Sales
           jsObjData={jsObjData}
           specifiedCommissions={specifiedCommissions}
-          top10={top10}
           selectedCategories={selectedCategories}
         />
       );
@@ -104,7 +98,6 @@ const Main = ({
         <Home
           jsObjData={jsObjData}
           specifiedCommissions={specifiedCommissions}
-          top10={top10}
           selectedCategories={selectedCategories}
         />
       );
@@ -114,7 +107,6 @@ const Main = ({
         <Home
           jsObjData={jsObjData}
           specifiedCommissions={specifiedCommissions}
-          top10={top10}
           selectedCategories={selectedCategories}
         />
       );

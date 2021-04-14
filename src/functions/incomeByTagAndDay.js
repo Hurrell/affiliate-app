@@ -1,6 +1,6 @@
 import getCommission from "./getCommission";
 import incomeByTag from "./incomeByTag";
-const incomeByTagAndDay = (data, specifiedCommissions, top10) => {
+const incomeByTagAndDay = (data, specifiedCommissions) => {
   let tagTotals = [];
 
   if (!data["Fee-Orders"]) {
@@ -43,34 +43,6 @@ const incomeByTagAndDay = (data, specifiedCommissions, top10) => {
     tag.data.reverse();
   }
 
-  if (top10) {
-    let top10Tags = [];
-    for (let item of incomeByTag(data, specifiedCommissions, true)) {
-      top10Tags.push(item.tag);
-    }
-    // let newTagTotals = [];
-    // for (item of tagTotals){
-    //     if ()
-    // }
-    tagTotals = tagTotals.filter((item) => top10Tags.includes(item.id));
-  }
-  //sort it all!
-  //   tagTotals = tagTotals.sort((a, b) => {
-  //     if (a.income > b.income) {
-  //       return -1;
-  //     } else if (a.income < b.income) {
-  //       return 1;
-  //     }
-  //     return 0;
-  //   });
-  // console.log(top10);
-  //reduce to top 10
-  //   if (top10 && tagTotals.length > 10) {
-  //     // console.log("before slice ", tagTotals);
-  //     tagTotals = tagTotals.slice(0, 9);
-  //     // console.log("after slice ", tagTotals);
-  //   }
-  //   console.log(tagTotals);
   return tagTotals;
 };
 

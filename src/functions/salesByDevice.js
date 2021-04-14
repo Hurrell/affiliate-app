@@ -1,4 +1,4 @@
-const salesByDevice = (data, specifiedCommissions, top10, categories) => {
+const salesByDevice = (data, specifiedCommissions, categories) => {
   //Take in json data
   //Spit out nivo formatted data
 

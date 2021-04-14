@@ -13,7 +13,6 @@ const Sales = ({
   chart,
   jsObjData,
   specifiedCommissions,
-  top10,
   selectedCategories,
   categories,
 }) => {
@@ -25,7 +24,6 @@ const Sales = ({
           data={salesByDevice(
             jsObjData,
             specifiedCommissions,
-            top10,
             selectedCategories
           )}
           id="deviceTypeGroup"
@@ -37,7 +35,6 @@ const Sales = ({
           data={incomeByDevice(
             jsObjData,
             specifiedCommissions,
-            top10,
             selectedCategories
           )}
           id="deviceTypeGroup"
@@ -46,7 +43,7 @@ const Sales = ({
       </div>
       <div className="figure">
         {/* <div>100%</div> */}
-        <h2>{averageCommission(jsObjData, specifiedCommissions, top10)}%</h2>
+        <h2>{averageCommission(jsObjData, specifiedCommissions)}%</h2>
         <p>Average Affiliate Fee</p>
       </div>
       <div className="chart">
@@ -54,7 +51,6 @@ const Sales = ({
           data={incomeByDevice(
             jsObjData,
             specifiedCommissions,
-            top10,
             selectedCategories
           )}
           id="deviceTypeGroup"

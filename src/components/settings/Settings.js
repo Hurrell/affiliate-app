@@ -8,7 +8,6 @@ const Settings = ({
   jsObjData,
   specifiedCommissions,
   handleCommissionChange,
-  top10,
   handleResetCommissions,
   handleTop10Click,
   selectedCategories,
@@ -32,10 +31,6 @@ const Settings = ({
 
   return (
     <div className="settings">
-      {/* <div className="top10">
-        Display top 10 only
-        <input type="checkbox" checked={top10} onClick={handleTop10Click} />
-      </div> */}
       <button
         data-section="tags"
         onClick={handleButtonClick}
@@ -58,7 +53,6 @@ const Settings = ({
             data={jsObjData}
             specifiedCommissions={specifiedCommissions}
             onCommissionChange={handleCommissionChange}
-            top10={top10}
             onResetCommissions={handleResetCommissions}
             selectedCategories={selectedCategories}
             handleCategorySelect={handleCategorySelect}

@@ -1,6 +1,6 @@
 import getCommission from "./getCommission";
 
-const incomeByTag = (data, specifiedCommissions, top10) => {
+const incomeByTag = (data, specifiedCommissions) => {
   let tagTotals = [];
 
   if (!data["Fee-Orders"]) {
@@ -83,13 +83,6 @@ const incomeByTag = (data, specifiedCommissions, top10) => {
     }
     return 0;
   });
-  // console.log(top10);
-  //reduce to top 10
-  if (top10 && tagTotals.length > 10) {
-    // console.log("before slice ", tagTotals);
-    tagTotals = tagTotals.slice(0, 9);
-    // console.log("after slice ", tagTotals);
-  }
 
   return tagTotals;
 };

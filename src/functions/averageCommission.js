@@ -1,6 +1,6 @@
 import getCommission from "./getCommission";
 
-const averageCommission = (data, specifiedCommissions, top10) => {
+const averageCommission = (data, specifiedCommissions) => {
   let totalSales = 0;
   let totalIncome = 0;
   if (!data["Fee-Orders"]) {

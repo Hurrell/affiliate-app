@@ -1,5 +1,6 @@
 import React from "react";
 import basicStats from "../functions/basicStats";
+import filter from "../functions/filter";
 
 import "./Home.css";
 
@@ -7,7 +8,6 @@ const Home = ({
   chart,
   jsObjData,
   specifiedCommissions,
-  top10,
   selectedCategories,
   categories,
 }) => {
@@ -22,6 +22,8 @@ const Home = ({
     minimumFractionDigits: 0,
     maximumFractionDigits: 2,
   };
+
+  let filteredData = filter(jsObjData, selectedCategories);
   return (
     <div className="home-column">
       <div>
@@ -29,19 +31,21 @@ const Home = ({
         <div className="home-row">
           <div>
             <h3>Items:</h3>
-            <div className="stat">{basicStats.getOrdersVolume(jsObjData)}</div>
+            <div className="stat">
+              {basicStats.getOrdersVolume(filteredData)}
+            </div>
           </div>
           <div>
             <h3>Baskets:</h3>
             <div className="stat">
-              {basicStats.getTotalOrdersBaskets(jsObjData)}
+              {basicStats.getTotalOrdersBaskets(filteredData)}
             </div>
           </div>
           <div>
             <h3>Average Item Cost:</h3>
             <div className="stat">
               {new Intl.NumberFormat("en-US", currencyFormat).format(
-                basicStats.getAverageOrdersItemCost(jsObjData)
+                basicStats.getAverageOrdersItemCost(filteredData)
               )}
             </div>
           </div>
@@ -49,7 +53,7 @@ const Home = ({
             <h3>Average Basket Cost:</h3>
             <div className="stat">
               {new Intl.NumberFormat("en-US", currencyFormat).format(
-                basicStats.getAverageOrdersBasketCost(jsObjData)
+                basicStats.getAverageOrdersBasketCost(filteredData)
               )}
             </div>
           </div>
@@ -57,7 +61,7 @@ const Home = ({
             <h3>Turnover:</h3>
             <div className="stat">
               {new Intl.NumberFormat("en-US", currencyFormat).format(
-                basicStats.getTotalOrdersTurnover(jsObjData)
+                basicStats.getTotalOrdersTurnover(filteredData)
               )}
             </div>
           </div>
@@ -68,19 +72,21 @@ const Home = ({
         <div className="home-row">
           <div>
             <h3>Items:</h3>
-            <div className="stat">{basicStats.getSalesVolume(jsObjData)}</div>
+            <div className="stat">
+              {basicStats.getSalesVolume(filteredData)}
+            </div>
           </div>
           <div>
             <h3>Baskets:</h3>
             <div className="stat">
-              {basicStats.getTotalSalesBaskets(jsObjData)}
+              {basicStats.getTotalSalesBaskets(filteredData)}
             </div>
           </div>
           <div>
             <h3>Average Item Cost:</h3>
             <div className="stat">
               {new Intl.NumberFormat("en-US", currencyFormat).format(
-                basicStats.getAverageSalesItemCost(jsObjData)
+                basicStats.getAverageSalesItemCost(filteredData)
               )}
             </div>
           </div>
@@ -88,7 +94,7 @@ const Home = ({
             <h3>Average Basket Cost:</h3>
             <div className="stat">
               {new Intl.NumberFormat("en-US", currencyFormat).format(
-                basicStats.getAverageSalesBasketCost(jsObjData)
+                basicStats.getAverageSalesBasketCost(filteredData)
               )}
             </div>
           </div>
@@ -96,7 +102,7 @@ const Home = ({
             <h3>Turnover:</h3>
             <div className="stat">
               {new Intl.NumberFormat("en-US", currencyFormat).format(
-                basicStats.getTotalSalesTurnover(jsObjData)
+                basicStats.getTotalSalesTurnover(filteredData)
               )}
             </div>
           </div>
@@ -107,19 +113,21 @@ const Home = ({
         <div className="home-row">
           <div>
             <h3>Items:</h3>
-            <div className="stat">{basicStats.getTotalReturns(jsObjData)}</div>
+            <div className="stat">
+              {basicStats.getTotalReturns(filteredData)}
+            </div>
           </div>
           <div>
             <h3>Baskets:</h3>
             <div className="stat">
-              {basicStats.getTotalReturnsBaskets(jsObjData)}
+              {basicStats.getTotalReturnsBaskets(filteredData)}
             </div>
           </div>
           <div>
             <h3>Average Item Cost:</h3>
             <div className="stat">
               {new Intl.NumberFormat("en-US", currencyFormat).format(
-                Math.round(basicStats.getAverageReturnedItemCost(jsObjData))
+                Math.round(basicStats.getAverageReturnedItemCost(filteredData))
               )}
             </div>
           </div>
@@ -127,7 +135,7 @@ const Home = ({
             <h3>Average Basket Cost:</h3>
             <div className="stat">
               {new Intl.NumberFormat("en-US", currencyFormat).format(
-                basicStats.getAverageReturnsBasketCost(jsObjData)
+                basicStats.getAverageReturnsBasketCost(filteredData)
               )}
             </div>
           </div>
@@ -135,7 +143,7 @@ const Home = ({
             <h3>Returns Turnover:</h3>
             <div className="stat">
               {new Intl.NumberFormat("en-US", currencyFormat).format(
-                Math.round(basicStats.getTotalReturnsCost(jsObjData))
+                Math.round(basicStats.getTotalReturnsCost(filteredData))
               )}
             </div>
           </div>
@@ -148,7 +156,7 @@ const Home = ({
             <h3>Average Fee Fraction:</h3>
             <div className="stat">
               {new Intl.NumberFormat("en-US", percentFormat).format(
-                basicStats.getAverageFeeFraction(jsObjData)
+                basicStats.getAverageFeeFraction(filteredData)
               )}
             </div>
           </div>
@@ -158,14 +166,14 @@ const Home = ({
               {new Intl.NumberFormat("en-US", {
                 style: "currency",
                 currency: "USD",
-              }).format(basicStats.getAverageFee(jsObjData))}
+              }).format(basicStats.getAverageFee(filteredData))}
             </div>
           </div>
           <div>
             <h3>Actual Income:</h3>
             <div className="stat">
               {new Intl.NumberFormat("en-US", currencyFormat).format(
-                Math.round(basicStats.getTotalActualIncome(jsObjData))
+                Math.round(basicStats.getTotalActualIncome(filteredData))
               )}
             </div>
           </div>

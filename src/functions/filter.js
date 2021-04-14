@@ -1,4 +1,4 @@
-export default function (data, categories, tags, startDate, endDate, top10) {
+export default function (data, categories, tags, startDate, endDate) {
   let filteredData = {};
   console.log("categories", categories);
   console.log("dataintofilter", data);

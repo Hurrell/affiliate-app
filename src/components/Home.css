@@ -4,6 +4,9 @@
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 } */
 
+.home-column {
+  margin: 15px;
+}
 .home-row {
   display: flex;
   align-items: center;

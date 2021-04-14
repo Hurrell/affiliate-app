@@ -1,5 +1,4 @@
 const exampleSettings = {
-  top10: true,
   categories: [
     {
       category: "Business & Industrial Supplies",

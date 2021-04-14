@@ -7,7 +7,6 @@ function CommissionTable({
   data,
   specifiedCommissions,
   onCommissionChange,
-  top10,
   onResetCommissions,
   onTop10Click,
   selectedCategories,
@@ -25,7 +24,6 @@ function CommissionTable({
     let categoriesArray = incomeByCategory(
       jsObjData,
       specifiedCommissions,
-      top10,
       categories.map((item) => {
         return item.category;
       })
@@ -155,7 +153,6 @@ function CommissionTable({
 
       <button onClick={handleSelectAll}>Select All/None</button>
       <button onClick={handleTop10Click}>Select Top 10/All</button>
-      {/* <input type="checkbox" checked={top10} onClick={handleTop10Click} /> */}
 
       {listCategories}
       {/* <button>Apply changes</button> */}

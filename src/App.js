@@ -13,7 +13,6 @@ import incomeByCategory from "./functions/incomeByCategory";
 function App() {
   const [jsObjData, setJsObjData] = useState(false);
   const [specifiedCommissions, setSpecifiedCommissions] = useState([]);
-  const [top10, setTop10] = useState(true);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [categories, setCategories] = useState([]);
 
@@ -40,11 +39,9 @@ function App() {
   };
 
   const handleTop10Click = (event) => {
-    console.log("top10");
     let categoriesArray = incomeByCategory(
       jsObjData,
       specifiedCommissions,
-      top10,
       categories.map((item) => {
         return item.category;
       })
@@ -146,14 +143,12 @@ function App() {
         chart={chart}
         jsObjData={jsObjData}
         specifiedCommissions={specifiedCommissions}
-        top10={top10}
         selectedCategories={selectedCategories}
         categories={categories}
       />
       <Settings
         jsObjData={jsObjData}
         specifiedCommissions={specifiedCommissions}
-        top10={top10}
         handleCommissionChange={handleCommissionChange}
         handleResetCommissions={handleResetCommissions}
         handleTop10Click={handleTop10Click}

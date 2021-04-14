@@ -1,11 +1,6 @@
 import getCommission from "./getCommission";
 
-const incomeByCategory = (
-  data,
-  specifiedCommissions,
-  top10,
-  selectedCategories
-) => {
+const incomeByCategory = (data, specifiedCommissions, selectedCategories) => {
   let categoryTotals = [];
 
   if (!data["Fee-Orders"]) {
@@ -93,13 +88,6 @@ const incomeByCategory = (
     }
     return 0;
   });
-
-  // //reduce to top 10
-  // if (top10 && categoryTotals.length > 10) {
-  //   // console.log("before slice ", tagTotals);
-  //   categoryTotals = categoryTotals.slice(0, 9);
-  //   // console.log("after slice ", tagTotals);
-  // }
 
   return categoryTotals;
 };
