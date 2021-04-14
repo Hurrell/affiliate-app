@@ -17,6 +17,8 @@ function CommissionTable({
 }) {
   // console.log("updateCommissions1", props.specifiedCommissions);
 
+  const [categoryDisplayOrder, setCategoryDisplayOrder] = useState("income");
+
   const [commissions, setCommissions] = useState([]);
 
   const updateCommissions = (jsObjData) => {
@@ -29,6 +31,18 @@ function CommissionTable({
       })
     );
 
+    //Sort based on user selected order.
+    switch (categoryDisplayOrder) {
+      case "income":
+        categoriesArray.sort((a, b) => a.income > b.income);
+        break;
+      case "alpha":
+        categoriesArray.sort((a, b) => a.category.localeCompare(b.category));
+        break;
+      default:
+        categoriesArray.sort((a, b) => a.income > b.income);
+    }
+
     let commissionTable = [];
 
     for (let obj of categoriesArray) {
@@ -37,7 +51,7 @@ function CommissionTable({
         commission: getCommission(obj.category, specifiedCommissions),
       });
     }
-    commissionTable.sort((a, b) => a.category.localeCompare(b.category));
+
     // for row in data,
     // if category not already logged
     // add category and getCommission
@@ -83,6 +97,17 @@ function CommissionTable({
     onSelectAll(event);
   };
 
+  const handleCategorySort = (event) => {
+    event.preventDefault();
+    if (event.target.dataset.order !== categoryDisplayOrder) {
+      if (
+        event.target.dataset.order === "alpha" ||
+        event.target.dataset.order === "income"
+      )
+        setCategoryDisplayOrder(event.target.dataset.order);
+    }
+  };
+
   let listCategories = [];
   //console.log("commissionTable", categories);
   for (let item of commissions) {
@@ -115,10 +140,17 @@ function CommissionTable({
   console.log("props.categories", categories, selectedCategories);
   return (
     <form onSubmit={handleFormSubmit} className="category-table">
+      <button onClick={handleResetCommissions}>Reset Commissions</button>
+      <button onClick={handleCategorySort} data-order="income">
+        Sort by Income
+      </button>
+      <button onClick={handleCategorySort} data-order="alpha">
+        Sort alphabetically
+      </button>
+
       <button onClick={handleSelectAll}>Select All</button>
       {listCategories}
       {/* <button>Apply changes</button> */}
-      <button onClick={handleResetCommissions}>Reset Commissions</button>
     </form>
   );
 }
