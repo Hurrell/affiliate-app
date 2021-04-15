@@ -20,7 +20,15 @@ function App() {
   const [tags, setTags] = useState([]);
 
   const initCategories = (data) => {
-    let newCategories = getUniqueValues(data, "category").map((category) => {
+    let feeEarningsCategories = getUniqueValues(
+      data["Fee-Earnings"],
+      "category"
+    );
+    let feeOrdersCategories = getUniqueValues(data["Fee-Orders"], "category");
+    let combined = [...feeEarningsCategories, ...feeOrdersCategories];
+    let combinedUnique = [...new Set(combined)];
+
+    let newCategories = combinedUnique.map((category) => {
       return {
         category: category,
         selected: true,
@@ -31,7 +39,12 @@ function App() {
   };
 
   const initTags = (data) => {
-    let newTags = getUniqueValues(data, "tag").map((tag) => {
+    let feeEarningsTags = getUniqueValues(data["Fee-Earnings"], "tag");
+    let feeOrdersTags = getUniqueValues(data["Fee-Orders"], "tag");
+    let combined = [...feeEarningsTags, ...feeOrdersTags];
+    let combinedUnique = [...new Set(combined)];
+
+    let newTags = combinedUnique.map((tag) => {
       return {
         tag: tag,
         selected: true,
@@ -43,8 +56,8 @@ function App() {
   const handleFileInput = async (e) => {
     try {
       const data = await xlsxImporter(e);
-      initCategories(data["Fee-Orders"]);
-      initTags(data["Fee-Orders"]);
+      initCategories(data);
+      initTags(data);
       setSelectedCategories(getUniqueValues(data["Fee-Orders"], "category"));
       setSelectedTags(getUniqueValues(data["Fee-Orders"], "tag"));
       setJsObjData(data);

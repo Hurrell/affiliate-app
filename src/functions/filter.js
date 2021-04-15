@@ -20,7 +20,7 @@ export default function (
   });
 
   filteredData["Fee-Earnings"] = data["Fee-Earnings"].filter((item) => {
-    if (!selectedTags.includes(item.trackingId)) {
+    if (!selectedTags.includes(item.tag)) {
       return false;
     }
     if (!selectedCategories.includes(item.category)) {

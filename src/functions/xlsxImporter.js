@@ -92,7 +92,7 @@ const earningsPageToJson = (pageData) => {
       name: row[1],
       asin: row[2],
       seller: row[3],
-      trackingId: row[4],
+      tag: row[4],
       dateShipped: row[5],
       price: row[6],
       itemsShipped: row[7],
