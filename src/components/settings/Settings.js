@@ -18,6 +18,7 @@ const Settings = ({
   tags,
   selectedTags,
   handleSelectAllTags,
+  handleTop10TagClick,
 }) => {
   const [expandedSection, setExpandedSection] = useState(null);
 
@@ -52,6 +53,7 @@ const Settings = ({
             selectedTags={selectedTags}
             handleTagSelect={handleTagSelect}
             onSelectAllTags={handleSelectAllTags}
+            onTop10TagClick={handleTop10TagClick}
           />
         }
       />

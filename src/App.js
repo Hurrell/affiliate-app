@@ -9,6 +9,7 @@ import Settings from "./components/settings/Settings";
 import xlsxImporter from "./functions/xlsxImporter";
 import getUniqueValues from "./functions/getUniqueValues";
 import incomeByCategory from "./functions/incomeByCategory";
+import incomeByTag from "./functions/incomeByTag";
 
 function App() {
   const [jsObjData, setJsObjData] = useState(false);
@@ -72,6 +73,29 @@ function App() {
       setSelectedCategories(top10Categories);
     } else {
       setSelectedCategories(categories.map((item) => item.category));
+    }
+  };
+
+  const handleTop10TagClick = (event) => {
+    let tagsArray = incomeByTag(
+      jsObjData,
+      specifiedCommissions,
+      tags.map((item) => {
+        return item.tag;
+      })
+    );
+
+    tagsArray.sort((a, b) => a.income > b.income);
+
+    let top10Categories = [];
+    for (let i = 0; i < 10; i++) {
+      top10Categories.push(tagsArray[i].tag);
+      console.log("top10click:", tagsArray[i]);
+    }
+    if (top10Categories.toString() !== selectedTags.toString()) {
+      setSelectedTags(top10Categories);
+    } else {
+      setSelectedTags(tags.map((item) => item.tag));
     }
   };
 
@@ -205,6 +229,7 @@ function App() {
         onSelectAll={handleSelectAll}
         handleTagSelect={handleTagSelect}
         handleSelectAllTags={handleSelectAllTags}
+        handleTop10TagClick={handleTop10TagClick}
       />
     </div>
   );

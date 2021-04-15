@@ -9,6 +9,7 @@ const TagSettings = ({
   onSelectAllTags,
   data,
   specifiedCommissions,
+  onTop10TagClick,
 }) => {
   const [tagDisplayOrder, setTagDisplayOrder] = useState("income");
   const [orderedTags, setOrderedTags] = useState(tags);
@@ -32,6 +33,11 @@ const TagSettings = ({
       )
         setTagDisplayOrder(event.target.dataset.order);
     }
+  };
+
+  const handleTop10TagClick = (event) => {
+    event.preventDefault();
+    onTop10TagClick(event);
   };
 
   const updateTags = (jsObjData) => {
@@ -105,7 +111,7 @@ const TagSettings = ({
       </button>
 
       <button onClick={handleSelectAllTags}>Select All/None</button>
-      {/* <button onClick={handleTop10Click}>Select Top 10/All</button> */}
+      <button onClick={handleTop10TagClick}>Select Top 10/All</button>
 
       {listTags}
     </form>
