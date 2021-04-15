@@ -19,6 +19,7 @@ const Settings = ({
   selectedTags,
   handleSelectAllTags,
   handleTop10TagClick,
+  handleClearAllFilters,
 }) => {
   const [expandedSection, setExpandedSection] = useState(null);
 
@@ -36,6 +37,7 @@ const Settings = ({
 
   return (
     <div className="settings">
+      <button onClick={handleClearAllFilters}>Clear all filters</button>
       <button
         data-section="tags"
         onClick={handleButtonClick}

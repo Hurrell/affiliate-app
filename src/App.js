@@ -199,6 +199,11 @@ function App() {
     appClassString = "App settings-open";
   }
 
+  const handleClearAllFilters = () => {
+    setSelectedTags(tags.map((item) => item.tag));
+    setSelectedCategories(categories.map((item) => item.category));
+  };
+
   return (
     <div className={appClassString}>
       <Header
@@ -230,6 +235,7 @@ function App() {
         handleTagSelect={handleTagSelect}
         handleSelectAllTags={handleSelectAllTags}
         handleTop10TagClick={handleTop10TagClick}
+        handleClearAllFilters={handleClearAllFilters}
       />
     </div>
   );
