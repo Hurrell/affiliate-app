@@ -64,7 +64,7 @@ const Main = ({
         <div className="chart-container">
           <RenderIncomeByCategory
             totalsByCategory={incomeByCategory(
-              jsObjData,
+              filteredData,
               specifiedCommissions,
               selectedCategories
             )}
@@ -77,7 +77,7 @@ const Main = ({
         <div className="chart-container">
           <RenderIncomeByTagAndDate
             totalsByTagAndDate={incomeByTagAndDay(
-              jsObjData,
+              filteredData,
               specifiedCommissions,
               selectedCategories
             )}
@@ -88,7 +88,7 @@ const Main = ({
     case "sales":
       renderChart = (
         <Sales
-          jsObjData={jsObjData}
+          jsObjData={filteredData}
           specifiedCommissions={specifiedCommissions}
           selectedCategories={selectedCategories}
           selectedTags={selectedTags}
@@ -98,7 +98,7 @@ const Main = ({
     case "home":
       renderChart = (
         <Home
-          jsObjData={jsObjData}
+          jsObjData={filteredData}
           specifiedCommissions={specifiedCommissions}
           selectedCategories={selectedCategories}
           selectedTags={selectedTags}
