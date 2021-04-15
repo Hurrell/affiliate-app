@@ -10,6 +10,7 @@ const Home = ({
   specifiedCommissions,
   selectedCategories,
   categories,
+  selectedTags,
 }) => {
   let currencyFormat = {
     style: "currency",
@@ -23,7 +24,7 @@ const Home = ({
     maximumFractionDigits: 2,
   };
 
-  let filteredData = filter(jsObjData, selectedCategories);
+  let filteredData = filter(jsObjData, selectedCategories, selectedTags);
   return (
     <div className="home-column">
       <div>

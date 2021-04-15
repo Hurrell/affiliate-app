@@ -15,6 +15,8 @@ function App() {
   const [specifiedCommissions, setSpecifiedCommissions] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [selectedTags, setSelectedTags] = useState([]);
+  const [tags, setTags] = useState([]);
 
   const initCategories = (data) => {
     let newCategories = getUniqueValues(data, "category").map((category) => {
@@ -27,11 +29,23 @@ function App() {
     setCategories(newCategories);
   };
 
+  const initTags = (data) => {
+    let newTags = getUniqueValues(data, "tag").map((tag) => {
+      return {
+        tag: tag,
+        selected: true,
+      };
+    });
+    setTags(newTags);
+  };
+
   const handleFileInput = async (e) => {
     try {
       const data = await xlsxImporter(e);
       initCategories(data["Fee-Orders"]);
+      initTags(data["Fee-Orders"]);
       setSelectedCategories(getUniqueValues(data["Fee-Orders"], "category"));
+      setSelectedTags(getUniqueValues(data["Fee-Orders"], "tag"));
       setJsObjData(data);
     } catch (err) {
       console.log(err);
@@ -93,6 +107,27 @@ function App() {
     categories[categoryIndex].selected = !categories[categoryIndex].selected;
   };
 
+  const handleTagSelect = (event) => {
+    console.log("Tag Select: ");
+    if (selectedTags.includes(event.target.dataset.tag)) {
+      setSelectedTags(
+        selectedTags.filter((tag) => {
+          return tag !== event.target.dataset.tag;
+        })
+      );
+    } else {
+      setSelectedTags([...selectedTags, event.target.dataset.tag]);
+    }
+
+    let changedTag = event.target.dataset.tag;
+    let tagIndex = tags.findIndex((item) => {
+      return item.tag === changedTag;
+    });
+    if (tagIndex === -1) return;
+
+    tags[tagIndex].selected = !tags[tagIndex].selected;
+  };
+
   const handleResetCommissions = (event) => {
     setSpecifiedCommissions([]);
   };
@@ -144,7 +179,9 @@ function App() {
         jsObjData={jsObjData}
         specifiedCommissions={specifiedCommissions}
         selectedCategories={selectedCategories}
+        selectedTags={selectedTags}
         categories={categories}
+        tags={tags}
       />
       <Settings
         jsObjData={jsObjData}
@@ -153,9 +190,12 @@ function App() {
         handleResetCommissions={handleResetCommissions}
         handleTop10Click={handleTop10Click}
         selectedCategories={selectedCategories}
+        selectedTags={selectedTags}
         handleCategorySelect={handleCategorySelect}
         categories={categories}
+        tags={tags}
         onSelectAll={handleSelectAll}
+        handleTagSelect={handleTagSelect}
       />
     </div>
   );

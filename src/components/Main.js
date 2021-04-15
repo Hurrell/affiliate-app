@@ -23,6 +23,7 @@ const Main = ({
   specifiedCommissions,
   selectedCategories,
   categories,
+  selectedTags,
 }) => {
   // Guard against lack of data
   if (!jsObjData["Fee-Orders"]) {
@@ -33,7 +34,7 @@ const Main = ({
     );
   }
 
-  let filteredData = filter(jsObjData, selectedCategories);
+  let filteredData = filter(jsObjData, selectedCategories, selectedTags);
   let renderChart;
   switch (chart) {
     case "devices":
@@ -90,6 +91,7 @@ const Main = ({
           jsObjData={jsObjData}
           specifiedCommissions={specifiedCommissions}
           selectedCategories={selectedCategories}
+          selectedTags={selectedTags}
         />
       );
       break;
@@ -99,6 +101,7 @@ const Main = ({
           jsObjData={jsObjData}
           specifiedCommissions={specifiedCommissions}
           selectedCategories={selectedCategories}
+          selectedTags={selectedTags}
         />
       );
       break;
@@ -108,6 +111,7 @@ const Main = ({
           jsObjData={jsObjData}
           specifiedCommissions={specifiedCommissions}
           selectedCategories={selectedCategories}
+          selectedTags={selectedTags}
         />
       );
   }

@@ -1,22 +1,29 @@
-export default function (data, categories, tags, startDate, endDate) {
+export default function (
+  data,
+  selectedCategories,
+  selectedTags,
+  startDate,
+  endDate
+) {
   let filteredData = {};
-  console.log("categories", categories);
+  console.log("categories", selectedCategories);
+  console.log("tags", selectedTags);
   console.log("dataintofilter", data);
   filteredData["Fee-Orders"] = data["Fee-Orders"].filter((item) => {
-    // if (!(item.tag in tags)) {
-    //   return false;
-    // }
-    if (!categories.includes(item.category)) {
+    if (!selectedTags.includes(item.tag)) {
+      return false;
+    }
+    if (!selectedCategories.includes(item.category)) {
       return false;
     }
     return true;
   });
 
   filteredData["Fee-Earnings"] = data["Fee-Earnings"].filter((item) => {
-    // if (!(item.trackingId in tags)) {
-    //   return false;
-    // }
-    if (!categories.includes(item.category)) {
+    if (!selectedTags.includes(item.trackingId)) {
+      return false;
+    }
+    if (!selectedCategories.includes(item.category)) {
       return false;
     }
     return true;

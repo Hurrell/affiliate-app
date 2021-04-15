@@ -1,0 +1,17 @@
+.tag-table {
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  /* margin: 10px;
+      font-size: 12px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); */
+}
+.tag {
+  display: flex;
+}
+
+/* .tag-name {
+  flex: 1 1;
+} */

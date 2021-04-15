@@ -14,6 +14,9 @@ const Settings = ({
   handleCategorySelect,
   categories,
   onSelectAll,
+  handleTagSelect,
+  tags,
+  selectedTags,
 }) => {
   const [expandedSection, setExpandedSection] = useState(null);
 
@@ -38,7 +41,16 @@ const Settings = ({
       >
         Tags
       </button>
-      <TagSettings expanded={expandedSection === "tags"} />
+      <AccordianItem
+        expanded={expandedSection === "tags"}
+        contents={
+          <TagSettings
+            tags={tags}
+            selectedTags={selectedTags}
+            handleTagSelect={handleTagSelect}
+          />
+        }
+      />
       <button
         data-section="categories"
         onClick={handleButtonClick}
