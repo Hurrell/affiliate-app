@@ -17,6 +17,7 @@ const Settings = ({
   handleTagSelect,
   tags,
   selectedTags,
+  handleSelectAllTags,
 }) => {
   const [expandedSection, setExpandedSection] = useState(null);
 
@@ -45,9 +46,12 @@ const Settings = ({
         expanded={expandedSection === "tags"}
         contents={
           <TagSettings
+            data={jsObjData}
+            specifiedCommissions={specifiedCommissions}
             tags={tags}
             selectedTags={selectedTags}
             handleTagSelect={handleTagSelect}
+            onSelectAllTags={handleSelectAllTags}
           />
         }
       />

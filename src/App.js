@@ -83,6 +83,14 @@ function App() {
     }
   };
 
+  const handleSelectAllTags = (event) => {
+    if (selectedTags.length) {
+      setSelectedTags([]);
+    } else {
+      setSelectedTags(tags.map((item) => item.tag));
+    }
+  };
+
   const handleCategorySelect = (event) => {
     console.log("Category Select: ");
     if (selectedCategories.includes(event.target.dataset.category)) {
@@ -196,6 +204,7 @@ function App() {
         tags={tags}
         onSelectAll={handleSelectAll}
         handleTagSelect={handleTagSelect}
+        handleSelectAllTags={handleSelectAllTags}
       />
     </div>
   );

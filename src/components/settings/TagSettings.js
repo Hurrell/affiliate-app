@@ -1,14 +1,74 @@
-import React from "react";
+import React, { useState } from "react";
 import "./TagSettings.css";
+import incomeByTag from "../../functions/incomeByTag";
 
-const TagSettings = ({ tags, selectedTags, handleTagSelect }) => {
+const TagSettings = ({
+  tags,
+  selectedTags,
+  handleTagSelect,
+  onSelectAllTags,
+  data,
+  specifiedCommissions,
+}) => {
+  const [tagDisplayOrder, setTagDisplayOrder] = useState("income");
+  const [orderedTags, setOrderedTags] = useState(tags);
+
   //Prevent form submission.
   const handleFormSubmit = (event) => {
     event.preventDefault();
   };
 
+  const handleSelectAllTags = (event) => {
+    event.preventDefault();
+    onSelectAllTags(event);
+  };
+
+  const handleTagSort = (event) => {
+    event.preventDefault();
+    if (event.target.dataset.order !== tagDisplayOrder) {
+      if (
+        event.target.dataset.order === "alpha" ||
+        event.target.dataset.order === "income"
+      )
+        setTagDisplayOrder(event.target.dataset.order);
+    }
+  };
+
+  const updateTags = (jsObjData) => {
+    let tagsArray = incomeByTag(
+      jsObjData,
+      specifiedCommissions,
+      tags.map((item) => {
+        return item.tag;
+      })
+    );
+
+    //Sort based on user selected order.
+    switch (tagDisplayOrder) {
+      case "income":
+        tagsArray.sort((a, b) => a.income > b.income);
+        break;
+      case "alpha":
+        tagsArray.sort((a, b) => a.tag.localeCompare(b.tag));
+        break;
+      default:
+        tagsArray.sort((a, b) => a.income > b.income);
+    }
+
+    if (!orderedTags.every((item, iter) => item.tag === tagsArray[iter].tag)) {
+      setOrderedTags(tagsArray);
+    }
+  };
+
+  //initially order tags
+  if (!data) {
+    return null;
+  } else {
+    updateTags(data);
+  }
+
   let listTags = [];
-  for (let item of tags) {
+  for (let item of orderedTags) {
     listTags.push(
       <div key={item.tag} className="tag">
         <input
@@ -37,15 +97,15 @@ const TagSettings = ({ tags, selectedTags, handleTagSelect }) => {
   return (
     <form onSubmit={handleFormSubmit} className="tag-table">
       {/* <button onClick={handleResetCommissions}>Reset Commissions</button> */}
-      {/* <button onClick={handleCategorySort} data-order="income">
-      Sort by Income
-    </button>
-    <button onClick={handleCategorySort} data-order="alpha">
-      Sort alphabetically
-    </button>
+      <button onClick={handleTagSort} data-order="income">
+        Sort by Income
+      </button>
+      <button onClick={handleTagSort} data-order="alpha">
+        Sort alphabetically
+      </button>
 
-    <button onClick={handleSelectAll}>Select All/None</button>
-    <button onClick={handleTop10Click}>Select Top 10/All</button> */}
+      <button onClick={handleSelectAllTags}>Select All/None</button>
+      {/* <button onClick={handleTop10Click}>Select Top 10/All</button> */}
 
       {listTags}
     </form>
