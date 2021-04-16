@@ -32,13 +32,13 @@ function CommissionTable({
     //Sort based on user selected order.
     switch (categoryDisplayOrder) {
       case "income":
-        categoriesArray.sort((a, b) => a.income > b.income);
+        categoriesArray.sort((a, b) => b.income - a.income);
         break;
       case "alpha":
         categoriesArray.sort((a, b) => a.category.localeCompare(b.category));
         break;
       default:
-        categoriesArray.sort((a, b) => a.income > b.income);
+        categoriesArray.sort((a, b) => b.income - a.income);
     }
 
     let commissionTable = [];

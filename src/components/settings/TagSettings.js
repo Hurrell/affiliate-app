@@ -52,13 +52,13 @@ const TagSettings = ({
     //Sort based on user selected order.
     switch (tagDisplayOrder) {
       case "income":
-        tagsArray.sort((a, b) => a.income > b.income);
+        tagsArray.sort((a, b) => b.income - a.income);
         break;
       case "alpha":
         tagsArray.sort((a, b) => a.tag.localeCompare(b.tag));
         break;
       default:
-        tagsArray.sort((a, b) => a.income > b.income);
+        tagsArray.sort((a, b) => b.income - a.income);
     }
 
     if (!orderedTags.every((item, iter) => item.tag === tagsArray[iter].tag)) {
