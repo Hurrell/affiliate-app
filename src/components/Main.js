@@ -24,6 +24,7 @@ const Main = ({
   selectedCategories,
   categories,
   selectedTags,
+  country,
 }) => {
   // Guard against lack of data
   if (!jsObjData["Fee-Orders"]) {
@@ -102,6 +103,7 @@ const Main = ({
           specifiedCommissions={specifiedCommissions}
           selectedCategories={selectedCategories}
           selectedTags={selectedTags}
+          country={country}
         />
       );
       break;
@@ -112,6 +114,7 @@ const Main = ({
           specifiedCommissions={specifiedCommissions}
           selectedCategories={selectedCategories}
           selectedTags={selectedTags}
+          country={country}
         />
       );
   }

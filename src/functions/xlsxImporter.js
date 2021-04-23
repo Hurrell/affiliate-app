@@ -4,7 +4,72 @@ import XLSX from "xlsx";
 // const file = "../resources/exampleUSASales.xlsx";
 /* read a workbook */
 
-const orderPageToJson = (pageData) => {
+// // Guess country origin
+// const getCountry = (data) => {
+//   console.log("CHECKINGCOUNTRY", data["Fee-Orders"][1]);
+// };
+
+const headers = {
+  uk: {
+    orders: [
+      "Category",
+      "Name",
+      "ASIN",
+      "Date",
+      "Qty",
+      "Price",
+      "Link Type",
+      "Tag",
+      "Orders through product links",
+      "Device Type Group",
+    ],
+    earnings: [
+      "Category",
+      "Name",
+      "ASIN",
+      "Seller",
+      "Tracking ID",
+      "Date Shipped",
+      "Price",
+      "Items Shipped",
+      "Returns",
+      "Revenue",
+      "Ad Fees",
+      "Device Type Group",
+      "Direct",
+    ],
+  },
+  usCan: {
+    orders: [
+      "Category",
+      "Name",
+      "ASIN",
+      "Date",
+      "Qty",
+      "Price($)",
+      "Link Type",
+      "Tag",
+      "Indirect Sales",
+      "Device Type Group",
+    ],
+    earnings: [
+      "Category",
+      "Name",
+      "ASIN",
+      "Seller",
+      "Tracking ID",
+      "Date Shipped",
+      "Price($)",
+      "Items Shipped",
+      "Returns",
+      "Revenue($)",
+      "Ad Fees($)",
+      "Device Type Group",
+    ],
+  },
+};
+
+const orderPageToJson = (pageData, country) => {
   if (!pageData) {
     throw Error("Sheet is not compatible: (No Fee-Orders Sheet)");
   }
@@ -13,18 +78,34 @@ const orderPageToJson = (pageData) => {
     throw Error("Sheet is not compatible");
   }
 
-  const orderPageHeaders = [
-    "Category",
-    "Name",
-    "ASIN",
-    "Date",
-    "Qty",
-    "Price($)",
-    "Link Type",
-    "Tag",
-    "Indirect Sales",
-    "Device Type Group",
-  ];
+  let orderPageHeaders;
+
+  switch (country) {
+    case "us":
+      orderPageHeaders = headers.usCan.orders;
+      break;
+    case "canada":
+      orderPageHeaders = headers.usCan.orders;
+      break;
+    case "uk":
+      orderPageHeaders = headers.uk.orders;
+      break;
+    default:
+      throw Error("Country not defined" + country);
+  }
+
+  //[
+  //   "Category",
+  //   "Name",
+  //   "ASIN",
+  //   "Date",
+  //   "Qty",
+  //   "Price($)",
+  //   "Link Type",
+  //   "Tag",
+  //   "Indirect Sales",
+  //   "Device Type Group",
+  // ];
 
   for (let i in orderPageHeaders) {
     if (orderPageHeaders[i] !== pageData[1][i]) {
@@ -53,29 +134,48 @@ const orderPageToJson = (pageData) => {
   return orderPageJson;
 };
 
-const earningsPageToJson = (pageData) => {
+const earningsPageToJson = (pageData, country) => {
   if (!pageData) {
     throw Error("Sheet is not compatible: (No Fee-Earnings Sheet)");
   }
 
-  if (pageData[1].length !== 12) {
-    throw Error("Sheet is not compatible");
+  let earningsPageHeaders;
+  let dataWidth;
+
+  switch (country) {
+    case "us":
+      earningsPageHeaders = headers.usCan.earnings;
+      dataWidth = 12;
+      break;
+    case "canada":
+      earningsPageHeaders = headers.usCan.earnings;
+      dataWidth = 12;
+      break;
+    case "uk":
+      earningsPageHeaders = headers.uk.earnings;
+      dataWidth = 13;
+      break;
+    default:
+      throw Error("Country not defined");
   }
 
-  const earningsPageHeaders = [
-    "Category",
-    "Name",
-    "ASIN",
-    "Seller",
-    "Tracking ID",
-    "Date Shipped",
-    "Price($)",
-    "Items Shipped",
-    "Returns",
-    "Revenue($)",
-    "Ad Fees($)",
-    "Device Type Group",
-  ];
+  if (pageData[1].length !== dataWidth) {
+    throw Error("Sheet is not compatible");
+  }
+  // const earningsPageHeaders = [
+  //   "Category",
+  //   "Name",
+  //   "ASIN",
+  //   "Seller",
+  //   "Tracking ID",
+  //   "Date Shipped",
+  //   "Price($)",
+  //   "Items Shipped",
+  //   "Returns",
+  //   "Revenue($)",
+  //   "Ad Fees($)",
+  //   "Device Type Group",
+  // ];
 
   for (let i in earningsPageHeaders) {
     if (earningsPageHeaders[i] !== pageData[1][i]) {
@@ -106,26 +206,29 @@ const earningsPageToJson = (pageData) => {
   return earningsPageJson;
 };
 
-const arrayToJsObj = (data) => {
+const arrayToJsObj = (data, country) => {
   let jsObjData = {};
 
   if (!data["Fee-Orders"]) {
     throw Error("Sheet is not compatible: (No Fee-Orders Sheet)");
   } else {
-    jsObjData["Fee-Orders"] = orderPageToJson(data["Fee-Orders"]);
+    jsObjData["Fee-Orders"] = orderPageToJson(data["Fee-Orders"], country);
   }
 
   if (!data["Fee-Earnings"]) {
     throw Error("Sheet is not compatible: (No Fee-Orders Sheet)");
   } else {
-    jsObjData["Fee-Earnings"] = earningsPageToJson(data["Fee-Earnings"]);
+    jsObjData["Fee-Earnings"] = earningsPageToJson(
+      data["Fee-Earnings"],
+      country
+    );
   }
 
   console.log("JsObjectData", jsObjData);
   return jsObjData;
 };
 
-const xlsxImporter = (e) => {
+const xlsxImporter = (e, country) => {
   //Convert an XLSX into jsonData
   let file = e.target.files[0];
   let data = {};
@@ -145,7 +248,8 @@ const xlsxImporter = (e) => {
       // const data = XLSX.utils.sheet_to_json(first_worksheet, { header: 1 });
 
       console.log("data", data);
-      resolve(arrayToJsObj(data));
+      // getCountry(data);
+      resolve(arrayToJsObj(data, country));
     };
     reader.onerror = (e) => {
       console.log(e);

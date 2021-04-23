@@ -18,6 +18,7 @@ function App() {
   const [categories, setCategories] = useState([]);
   const [selectedTags, setSelectedTags] = useState([]);
   const [tags, setTags] = useState([]);
+  const [country, setCountry] = useState([]);
 
   const initCategories = (data) => {
     let feeEarningsCategories = getUniqueValues(
@@ -54,8 +55,14 @@ function App() {
   };
 
   const handleFileInput = async (e) => {
+    console.log("COUNTRY?:", e.target.dataset.country);
+
+    //First remove all previous data.
+    setJsObjData(false);
+
     try {
-      const data = await xlsxImporter(e);
+      setCountry(e.target.dataset.country);
+      const data = await xlsxImporter(e, e.target.dataset.country);
       initCategories(data);
       initTags(data);
       setSelectedCategories(getUniqueValues(data["Fee-Orders"], "category"));
@@ -232,6 +239,7 @@ function App() {
         selectedTags={selectedTags}
         categories={categories}
         tags={tags}
+        country={country}
       />
       <Settings
         jsObjData={jsObjData}

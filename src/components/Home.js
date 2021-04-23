@@ -11,12 +11,19 @@ const Home = ({
   selectedCategories,
   categories,
   selectedTags,
+  country,
 }) => {
   let currencyFormat = {
     style: "currency",
-    currency: "USD",
+    currency: country === "uk" ? "GBP" : "USD",
     maximumFractionDigits: 0,
     minimumFractionDigits: 0,
+  };
+  let currencyFormatDecimals = {
+    style: "currency",
+    currency: country === "uk" ? "GBP" : "USD",
+    maximumFractionDigits: 2,
+    minimumFractionDigits: 2,
   };
   let percentFormat = {
     style: "percent",
@@ -164,10 +171,9 @@ const Home = ({
           <div>
             <h3>Average Fee Per Item:</h3>
             <div className="stat">
-              {new Intl.NumberFormat("en-US", {
-                style: "currency",
-                currency: "USD",
-              }).format(basicStats.getAverageFee(filteredData))}
+              {new Intl.NumberFormat("en-US", currencyFormatDecimals).format(
+                basicStats.getAverageFee(filteredData)
+              )}
             </div>
           </div>
           <div>

@@ -3,8 +3,11 @@
   grid-area: header;
 
   /* Now layout header. */
-  display: grid;
-  grid-template-columns: 1fr 80px 80px;
+  /* display: grid;
+  grid-template-columns: 1fr 80px 80px; */
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 
   /* Style header. */
   color: grey;
@@ -31,7 +34,8 @@
 }
 
 .file-input + label,
-.settings-selector {
+.settings-selector,
+.load-file {
   /* Layout */
   padding: 5px;
   border-radius: 10px;
@@ -41,7 +45,13 @@
 }
 
 .file-input + label:hover,
-.settings-selector:hover {
+.settings-selector:hover,
+.load-file:hover {
   color: white;
   background-color: rgba(255, 255, 255, 0.308);
+}
+
+.load-options {
+  /* border: 1px solid white; */
+  color: white;
 }
