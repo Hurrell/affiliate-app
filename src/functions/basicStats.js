@@ -70,6 +70,26 @@ basicStats.getTotalActualIncome = (data) => {
   return actualIncome;
 };
 
+basicStats.getTotalFees = (data) => {
+  let actualIncome = 0;
+  for (let item of data["Fee-Earnings"]) {
+    if (Number(item.itemsShipped)) {
+      actualIncome += Number(item["adFees($)"]);
+    }
+  }
+  return actualIncome;
+};
+
+basicStats.getTotalReturnsLostFees = (data) => {
+  let actualIncome = 0;
+  for (let item of data["Fee-Earnings"]) {
+    if (Number(item.returns)) {
+      actualIncome += Math.abs(Number(item["adFees($)"]));
+    }
+  }
+  return actualIncome;
+};
+
 basicStats.getAverageOrdersItemCost = (data) => {
   return (
     basicStats.getTotalOrdersTurnover(data) / basicStats.getOrdersVolume(data)
@@ -166,6 +186,25 @@ basicStats.getAverageFeeFraction = (data) => {
     basicStats.getTotalActualIncome(data) /
     basicStats.getTotalSalesTurnover(data)
   );
+};
+
+basicStats.chartReadyStats = (data) => {
+  return [
+    {
+      sum: "sales",
+      volume: basicStats.getSalesVolume(data),
+      baskets: basicStats.getTotalSalesBaskets(data),
+      salesDriven: basicStats.getTotalSalesTurnover(data),
+      income: basicStats.getTotalFees(data),
+    },
+    {
+      sum: "returns",
+      volume: basicStats.getTotalReturns(data),
+      baskets: basicStats.getTotalReturnsBaskets(data),
+      salesDriven: basicStats.getTotalReturnsCost(data),
+      income: basicStats.getTotalReturnsLostFees(data),
+    },
+  ];
 };
 
 export default basicStats;

@@ -15,6 +15,7 @@ import RenderSalesByDevice from "../renderers/renderPiechart";
 import RenderPiechart from "../renderers/renderPiechart";
 import Sales from "./Sales";
 import Home from "./Home";
+import Earnings from "./Earnings";
 import filter from "../functions/filter";
 
 const Main = ({
@@ -99,6 +100,17 @@ const Main = ({
     case "home":
       renderChart = (
         <Home
+          jsObjData={filteredData}
+          specifiedCommissions={specifiedCommissions}
+          selectedCategories={selectedCategories}
+          selectedTags={selectedTags}
+          country={country}
+        />
+      );
+      break;
+    case "earnings":
+      renderChart = (
+        <Earnings
           jsObjData={filteredData}
           specifiedCommissions={specifiedCommissions}
           selectedCategories={selectedCategories}
